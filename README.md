@@ -14,7 +14,7 @@ Most technicalities have already been discussed in-person. Thus, this README onl
 - Individual functional segment files have been created in the repository under ./Function-Segments and have been named accordingly. 
 - You may contribute via editing/pushing into your individual functional files.
 
-! IMPORTANT: You should only edit your individual function files in ./Function-Segments. When editing the text file, you should also only edit the one contained in the ./Function-Segments file. The .py and .txt file contained in the home file are our FINAL deliverable files and should only be edited by me (Darrance) for the final compilation and editing.
+! IMPORTANT: You should only edit your individual function files in ./Function-Segments. When editing the text file, you should also only edit the one contained in the ./Function-Segments folder. The .py and .txt file contained in the home file are our FINAL deliverable files and should only be edited by me (Darrance) for the final compilation and editing.
 > When opening the text file, use "with open("books_23094907.txt") as my_file:"
 
 
