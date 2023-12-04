@@ -29,6 +29,21 @@ Most technicalities have already been discussed in-person. Thus, this README onl
 
 
 
+## Code Formatting
+
+- In order to make our code look more uniform and tidy, we will be using the same code formatting convention.
+- For the sake of uniformity and readability, everyone is expected to integrate the [PEP-8 Styling Guide](https://peps.python.org/pep-0008/) when it comes to naming files, functions, etc...
+> Example of PEP-8 function naming: my_function():
+- You may refer to a snapshot of the PEP-8 naming convention below.
+<img width="594" alt="Screenshot 2023-12-01 at 21 27 52" src="https://github.com/darrancebeh/CSC1024-Assignment/assets/76253938/8bd61859-b231-417d-8f6d-97b8c47f0dfa">
+
+- Furthermore, to make our code look more uniform, you should install the "autopep8" extension in vscode.
+- You should enable the "format on save" setting and be sure to configure your formatter to "autopep8".
+> No instructions will be given to PyCharm as I am not familiar with that platform.
+- Should you face any problems, you can refer to [this link](https://stackoverflow.com/questions/39494277/how-do-you-format-code-on-save-in-vs-code). Otherwise, you may consult me in-person or watch youtube videos/google.
+
+
+
 ## Report Writing
 
 - To promote fairness in contribution, everyone is encouraged to contribute equally into the writing of the final report.
@@ -51,11 +66,9 @@ You are expected to be as detailed as possible when it comes to describing your 
 ## Code Documentation
 
 - Code Commenting, Identifier Names and Code Readability are all critiera in the grading scheme.
-- For the sake of uniformity and readability, everyone is expected to integrate the [PEP-8 Styling Guide](https://peps.python.org/pep-0008/) when it comes to naming files, functions, etc...
-> Example of PEP-8 function naming: my_function():
-- Everyone is reminded and encouraged to provide clear descriptions and comments of their code.
-- You may refer to a snapshot of the PEP-8 naming convention below.
-<img width="594" alt="Screenshot 2023-12-01 at 21 27 52" src="https://github.com/darrancebeh/CSC1024-Assignment/assets/76253938/8bd61859-b231-417d-8f6d-97b8c47f0dfa">
+- Everyone is reminded and encouraged to provide verbose yet clear descriptions and comments of their code.
+- One rule of thumb when doing code documentation: Explain your code like how you would explain it to a kid. Be as descriptive and beginner-friendly as possible.
+> You should use multi-line commenting to make our code look more uniform; syntax: ''' {text} '''
 
 
 
