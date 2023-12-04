@@ -1,5 +1,7 @@
 import os
 
+from get_books import get_books
+
 
 def clear():
     '''
@@ -32,6 +34,10 @@ def update_book():
 ╚═╝╚═╝░░╚══╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚══════╝""")
 
     print("\n\nWelcome to the Book Updating Interface!\n\n")
+
+    books = get_books()
+    for book in books:
+        print(book)
 
 
 update_book()

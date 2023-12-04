@@ -5,3 +5,4 @@ def get_books():
 
     with open("books_23094907.txt", "r") as f:
         books = f.read().split("\n")
+        return books
