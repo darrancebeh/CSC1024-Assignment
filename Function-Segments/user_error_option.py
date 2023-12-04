@@ -1,4 +1,31 @@
-def user_error_redirect():
+import os
+
+
+def clear():
+    '''
+    Function to clear terminal screen.
+    '''
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def user_error_redirect(message):
+    '''
+    Clears screen for visibility and displays error header.
+    '''
+    clear()
+    print(r"""
+███████╗██████╗░██████╗░░█████╗░██████╗░  ░█████╗░░█████╗░░█████╗░██╗░░░██╗██████╗░███████╗██████╗░██╗
+██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔══██╗  ██╔══██╗██╔══██╗██╔══██╗██║░░░██║██╔══██╗██╔════╝██╔══██╗██║
+█████╗░░██████╔╝██████╔╝██║░░██║██████╔╝  ██║░░██║██║░░╚═╝██║░░╚═╝██║░░░██║██████╔╝█████╗░░██║░░██║██║
+██╔══╝░░██╔══██╗██╔══██╗██║░░██║██╔══██╗  ██║░░██║██║░░██╗██║░░██╗██║░░░██║██╔══██╗██╔══╝░░██║░░██║╚═╝
+███████╗██║░░██║██║░░██║╚█████╔╝██║░░██║  ╚█████╔╝╚█████╔╝╚█████╔╝╚██████╔╝██║░░██║███████╗██████╔╝██╗
+╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝  ░╚════╝░░╚════╝░░╚════╝░░╚═════╝░╚═╝░░╚═╝╚══════╝╚═════╝░╚═╝""")
+
+    print("\nOh No! Looks Like You Inputted Something Wrong!\n")
+    print(f"Error Encountered: {message}\n")
+    print("Please Read Prompt Instructions Carefully and Try Again!\n")
+
     '''
     Function to let user decide whether to retry input upon error or redirect to main menu.
     '''

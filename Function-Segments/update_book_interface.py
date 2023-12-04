@@ -16,7 +16,7 @@ def clear():
 
 def update_book_interface():
     '''
-    Clears the Screen for better visibility.
+    Calls the clear function to clear the screen for better visiblity.
     Displays header for the function. (Book Update)
     '''
 
@@ -38,6 +38,11 @@ def update_book_interface():
 
     print("\n\nWelcome to the Book Updating Interface!\n\n")
 
+    '''
+    Displays all books in database.
+    Allows user to clearly know what books are in the database and what details to update.
+    '''
+
     print("Displaying All Books in Database...")
     print("Book details have been shortened for readability. In order to view full details, please navigate to display book feature in main menu.")
     print(
@@ -49,9 +54,15 @@ def update_book_interface():
     '''
     ISBN, author and title list initialized for user input validation.
     '''
+
     isbn_list = []
     author_list = []
     title_list = []
+
+    '''
+    Books in book list are split into individual details.
+    '''
+
     for book in book_list:
         book_count += 1
         isbn, author, title, publisher, genre, yoip, dop, status = book.split(
@@ -62,6 +73,11 @@ def update_book_interface():
         isbn_list.append(isbn)
         author_list.append(author)
         title_list.append(title)
+    print(f"\nTotal Book Count: {book_count}\n")
+
+    '''
+    Prompts user to input ISBN, author or title.
+    '''
 
     print(f"\nAll Books Have Been Displayed.\n")
     print("To Edit an Item, Please Input the Item's 13-digit ISBN, Author OR Book Title.\n")
@@ -79,18 +95,26 @@ def update_book_interface():
         '''
 
         if (len(user_input_id) != 13):
-            print(f"\nERROR: ISBN Should Contain EXACTLY 13 digits.\nYour Input Had {
-                len(user_input_id)} digits.")
-            print("Please Enter a Valid ISBN, Author or Title.")
-            if (user_error_redirect()):
+
+            '''
+            Redirects user to retry input or return to main menu.
+            '''
+
+            if (user_error_redirect(f"\nERROR: ISBN Should Contain EXACTLY 13 digits. Your Input Had {
+                    len(user_input_id)} digits.")):
                 update_book_interface()
             else:
                 return 0
 
         else:
+
+            '''
+            If user inputted ISBN that is not in ISBN list,
+            returns an error message and redirects user to input error handling function.
+            '''
+
             if (user_input_id not in isbn_list):
-                print(f"\nERROR: ISBN {user_input_id} Not Found in Database.")
-                if (user_error_redirect()):
+                if (user_error_redirect(f"\nERROR: ISBN {user_input_id} Not Found in Database.")):
                     update_book_interface()
                 else:
                     return 0
@@ -101,13 +125,12 @@ def update_book_interface():
         Convert text and author and title list to lower-case for better data validation.
         Checks if text input is in author or title list.
         '''
+
         author_list_lower = [author.lower() for author in author_list]
         title_list_lower = [title.lower() for title in title_list]
 
         if (user_input_id.lower() not in author_list_lower and user_input_id.lower() not in title_list_lower):
-            print(
-                f"\nERROR: {user_input_id} Not Found in Database.\nPlease Enter a Valid ISBN, Author or Title.")
-            if (user_error_redirect()):
+            if (user_error_redirect(f"\nERROR: {user_input_id} Not Found in Database. Please Enter a Valid ISBN, Author or Title.")):
                 update_book_interface()
             else:
                 return 0
@@ -116,7 +139,7 @@ def update_book_interface():
             '''
             If user input in lower case is in author list or title list,
             convert user input to correct case.
-            This is to allow for data validation in the future.
+            This is to allow for easier data validation later on.
             '''
 
             if (user_input_id.lower() in author_list_lower):
@@ -140,43 +163,73 @@ def update_book_interface():
                 '''
 
                 if (author_book_list):
-                    print("\nMultiple Books Found for Author.")
+                    print(f"\nMultiple Books Found for Author {
+                          user_input_id}.")
                     print("Please Select the Book to Update:\n")
                     book_count = 0
+
+                    '''
+                    Displays all books under the author's name
+                    '''
+
                     for book in author_book_list:
                         book_count += 1
                         isbn, author, title, publisher, genre, yoip, dop, status = book
-                        print(f"[{book_count}] | {isbn} | {title}")
 
-                    print(f"\nTo Update a Book from {
-                          user_input_id}, Please Input the Book's 13-digit ISBN or Title from the List.\n")
-                    user_input_id = input("ISBN / Title:\n")
+                        print(f"[{book_count}] | {isbn} | {
+                              title} | {genre} | {status}")
 
-                    if (user_input_id.isdigit()):
-                        if (len(user_input_id) != 13):
-                            print(
-                                f"\nERROR: ISBN Should Contain EXACTLY 13 digits.\nYour Input Had {len(user_input_id)} digits.")
-                            if (user_error_redirect()):
-                                update_book_interface()
-                            else:
-                                return 0
+                    '''
+                    Prompts user to input book number to update.
+                    '''
 
+                    user_input_book_number = input(
+                        f"\nPlease Input Book Number to Update: [1] - [{book_count}]\n")
+
+                    if (user_input_book_number not in [str(i) for i in range(1, book_count + 1)]):
+                        '''
+                        Data validation to ensure that user input is a valid book number.
+                        '''
+
+                        if (user_error_redirect(f"\nERROR: Invalid Input Detected. Please Input an Option between [1] - [{book_count}].")):
+                            update_book_interface()
                         else:
-                            if (user_input_id not in isbn_list):
-                                print(
-                                    f"\nERROR: ISBN {user_input_id} Not Found in Database. Please Enter a Valid ISBN or Title.")
-                                if (user_error_redirect()):
-                                    update_book_interface()
-                                else:
-                                    return 0
+                            return 0
                     else:
-                        if (user_input_id.lower() not in title_list):
-                            print(
-                                f"\nERROR: {user_input_id} Not Found in Database. Please Enter a Valid ISBN or Title.")
-                            if (user_error_redirect()):
-                                update_book_interface()
-                            else:
-                                return 0
+                        '''
+                        If user input is valid,
+                        Assigns user inputted book number to associated book ISBN.
+                        Filtering books by ISBN makes more sense and is more optimal for data validation.
+                        This is because ISBN is unique to each book and WILL NOT HAVE duplicates.
+                        '''
+
+                        user_input_id = author_book_list[int(
+                            user_input_book_number) - 1][0]
+
+                else:
+                    '''
+                    If no duplicate author-book is found, (meaning that author only has 1 book in database)
+                    auto-assign user inputted author name to associated book ISBN.
+                    Filtering books by ISBN makes more sense and is more optimal for data validation.
+                    This is because ISBN is unique to each book and WILL NOT HAVE duplicates.
+                    '''
+
+                    '''
+                    Converts user input to correct author name case.
+                    '''
+                    if (user_input_id.lower() in author_list_lower):
+                        user_input_id = author_list[author_list_lower.index(
+                            user_input_id.lower())]
+
+                    '''
+                    Runs through the book list to find book with same author name.
+                    Assigns book ISBN to user input.
+                    '''
+                    for book in book_list:
+                        isbn, author, title, publisher, genre, yoip, dop, status = book.split(
+                            "|")
+                        if (author == user_input_id):
+                            user_input_id = isbn
 
     '''
     If user input is valid,
@@ -186,6 +239,15 @@ def update_book_interface():
     '''
 
     clear()
+    print(r"""       
+██████╗░░█████╗░░█████╗░██╗░░██╗  ███████╗░█████╗░██╗░░░██╗███╗░░██╗██████╗░██╗
+██╔══██╗██╔══██╗██╔══██╗██║░██╔╝  ██╔════╝██╔══██╗██║░░░██║████╗░██║██╔══██╗██║
+██████╦╝██║░░██║██║░░██║█████═╝░  █████╗░░██║░░██║██║░░░██║██╔██╗██║██║░░██║██║
+██╔══██╗██║░░██║██║░░██║██╔═██╗░  ██╔══╝░░██║░░██║██║░░░██║██║╚████║██║░░██║╚═╝
+██████╦╝╚█████╔╝╚█████╔╝██║░╚██╗  ██║░░░░░╚█████╔╝╚██████╔╝██║░╚███║██████╔╝██╗
+╚═════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝  ╚═╝░░░░░░╚════╝░░╚═════╝░╚═╝░░╚══╝╚═════╝░╚═╝
+""")
+    print("\nCongratulations! Your Input is Valid and A Book Has Been Found!\n")
     for book in book_list:
         isbn, author, title, publisher, genre, yoip, dop, status = book.split(
             "|")
@@ -206,9 +268,7 @@ def update_book_interface():
                 "[1] - ISBN\n[2] - Author\n[3] - Title\n[4] - Publisher\n[5] - Genre\n[6] - Year of Initial Publication\n[7] - Date of Latest Publication\n[8] - Book Status\n\n")
 
             if (user_update_option not in ['1', '2', '3', '4', '5', '6', '7', '8']):
-                print(
-                    "\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4].")
-                if (user_error_redirect()):
+                if (user_error_redirect("\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4].")):
                     update_book_interface()
                 else:
                     return 0
@@ -219,17 +279,13 @@ def update_book_interface():
                         "Please Input New ISBN (13 Digits):\n")
 
                     if (len(new_isbn) != 13):
-                        print(
-                            f"\nERROR: ISBN Should Contain EXACTLY 13 digits.\nYour Input Had {len(new_isbn)} digits.")
-                        if (user_error_redirect()):
+                        if (user_error_redirect(f"\nERROR: ISBN Should Contain EXACTLY 13 digits. Your Input Had {len(new_isbn)} digits.")):
                             update_book_interface()
                         else:
                             return 0
                     else:
                         if (new_isbn in isbn_list):
-                            print(
-                                f"\nERROR: ISBN {new_isbn} Already Exists in Database.")
-                            if (user_error_redirect()):
+                            if (user_error_redirect(f"\nERROR: ISBN {new_isbn} Already Exists in Database.")):
                                 update_book_interface()
                             else:
                                 return 0
@@ -293,9 +349,7 @@ def update_book_interface():
                         "Please Input New Status:\n[1] - Wishlist\n[2] - To-Read\n[3] - Reading\n[4] - Completed\n\n")
 
                     if (new_status not in ["1", "2", "3", "4"]):
-                        print(
-                            "\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4].")
-                        if (user_error_redirect()):
+                        if (user_error_redirect("\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4].")):
                             update_book_interface()
                         else:
                             return 0
