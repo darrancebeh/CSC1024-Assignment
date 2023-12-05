@@ -1,5 +1,7 @@
 import os
+import datetime
 # import os for terminal screen clearing
+# import datetime for date and time functions for user experience improvement
 
 ''' 
 Utility Functions START
@@ -64,7 +66,7 @@ Utility Functions END
 
 
 '''
-Auxilarty Functions START
+Auxilary Functions START
 '''
 
 # function to get all books and details in database
@@ -104,7 +106,7 @@ def check_author_multiple_book(author):
 
 
 '''
-Auxilarty Functions END
+Auxilary Functions END
 '''
 
 
@@ -167,6 +169,30 @@ Main Program CRUD Functions END
 '''
 Main Program User Interfaces START
 '''
+
+
+def team_background():
+    pass
+
+
+def exit_program():
+    pass
+
+
+def add_book_interface():
+    pass
+
+
+def delete_book_interface():
+    pass
+
+
+def display_book_interface():
+    pass
+
+
+def search_book_interface():
+    pass
 
 
 def update_book_interface():
@@ -527,6 +553,89 @@ def update_book_interface():
                         status, new_status, "status")
 
 
+def main_user_interface():
+    '''
+    Calls the clear function to clear the screen for better visiblity.
+    Displays header for the function. (Main Menu)
+    '''
+
+    clear()
+    print(r"""
+██████╗░███████╗██████╗░░██████╗░█████╗░███╗░░██╗░█████╗░██╗░░░░░  ██████╗░░█████╗░░█████╗░██╗░░██╗
+██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗████╗░██║██╔══██╗██║░░░░░  ██╔══██╗██╔══██╗██╔══██╗██║░██╔╝
+██████╔╝█████╗░░██████╔╝╚█████╗░██║░░██║██╔██╗██║███████║██║░░░░░  ██████╦╝██║░░██║██║░░██║█████═╝░
+██╔═══╝░██╔══╝░░██╔══██╗░╚═══██╗██║░░██║██║╚████║██╔══██║██║░░░░░  ██╔══██╗██║░░██║██║░░██║██╔═██╗░
+██║░░░░░███████╗██║░░██║██████╔╝╚█████╔╝██║░╚███║██║░░██║███████╗  ██████╦╝╚█████╔╝╚█████╔╝██║░╚██╗
+╚═╝░░░░░╚══════╝╚═╝░░╚═╝╚═════╝░░╚════╝░╚═╝░░╚══╝╚═╝░░╚═╝╚══════╝  ╚═════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝
+
+███╗░░░███╗░█████╗░███╗░░██╗░█████╗░░██████╗░░█████╗░███╗░░░███╗███████╗███╗░░██╗████████╗
+████╗░████║██╔══██╗████╗░██║██╔══██╗██╔════╝░██╔══██╗████╗░████║██╔════╝████╗░██║╚══██╔══╝
+██╔████╔██║███████║██╔██╗██║███████║██║░░██╗░███████║██╔████╔██║█████╗░░██╔██╗██║░░░██║░░░
+██║╚██╔╝██║██╔══██║██║╚████║██╔══██║██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░██║╚████║░░░██║░░░
+██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║╚██████╔╝██║░░██║██║░╚═╝░██║███████╗██║░╚███║░░░██║░░░
+╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░
+
+░██████╗██╗░░░██╗░██████╗████████╗███████╗███╗░░░███╗   developed by:
+██╔════╝╚██╗░██╔╝██╔════╝╚══██╔══╝██╔════╝████╗░████║   1) Darrance Beh Heng Shek (Team Lead)
+╚█████╗░░╚████╔╝░╚█████╗░░░░██║░░░█████╗░░██╔████╔██║   2) Deron Ho Wen Harn
+░╚═══██╗░░╚██╔╝░░░╚═══██╗░░░██║░░░██╔══╝░░██║╚██╔╝██║   3) Izzat Zulqarnain Bin Izaiddin
+██████╔╝░░░██║░░░██████╔╝░░░██║░░░███████╗██║░╚═╝░██║   4) Tan Ho Chen
+╚═════╝░░░░╚═╝░░░╚═════╝░░░░╚═╝░░░╚══════╝╚═╝░░░░░╚═╝   5) Lee Ming Hui Isaac""")
+
+    print("\nWelcome to your Personal Book Management System!\n")
+    # displays current time in YYYY-MM-DD HH:MM:SS format
+    print(f"The Current Time is {
+          datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}")
+
+    print(r"""
+███████╗██╗░░░██╗███╗░░██╗░█████╗░████████╗██╗░█████╗░███╗░░██╗  ██╗░░░░░██╗░██████╗████████╗
+██╔════╝██║░░░██║████╗░██║██╔══██╗╚══██╔══╝██║██╔══██╗████╗░██║  ██║░░░░░██║██╔════╝╚══██╔══╝
+█████╗░░██║░░░██║██╔██╗██║██║░░╚═╝░░░██║░░░██║██║░░██║██╔██╗██║  ██║░░░░░██║╚█████╗░░░░██║░░░
+██╔══╝░░██║░░░██║██║╚████║██║░░██╗░░░██║░░░██║██║░░██║██║╚████║  ██║░░░░░██║░╚═══██╗░░░██║░░░
+██║░░░░░╚██████╔╝██║░╚███║╚█████╔╝░░░██║░░░██║╚█████╔╝██║░╚███║  ███████╗██║██████╔╝░░░██║░░░
+╚═╝░░░░░░╚═════╝░╚═╝░░╚══╝░╚════╝░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝  ╚══════╝╚═╝╚═════╝░░░░╚═╝░░░""")
+
+    print("\nWhat Would You Like to Do?\n")
+
+    print("[1] - View All Books in Database\n[2] - Add a Book to Database\n[3] - Update a Book in Database\n[4] - Delete a Book from Database\n[5] - Background of Our Project\n[x] - Exit the Program\n\n")
+
+    user_input_function_option = input("Input Option Here: ")
+
+    '''
+    Error handling for user input if input is not in the options.
+    '''
+
+    while (user_input_function_option not in ['1', '2', '3', '4', '5', 'x']):
+        print("\nInvalid Input Detected. Please Try Again.")
+        user_input_function_option = input(
+            "Input Option Here: ")
+
+    option_to_function_identifier = {
+        "1": display_book_interface,
+        "2": add_book_interface,
+        "3": update_book_interface,
+        "4": delete_book_interface,
+        "5": team_background,
+        "x": exit_program
+    }
+
+    option_to_function_identifier[user_input_function_option]()
+
+
 '''
 Main Program User Interfaces END
 '''
+
+
+'''
+Master Function VVV
+'''
+
+
+def main():
+    initial_time_program_start = datetime.datetime.now()
+    main_user_interface()
+
+
+if __name__ == "__main__":
+    main()
