@@ -3,7 +3,7 @@ def get_books():
     Returns a list of all books in the database.
     """
 
-    with open("books_23094907.txt", "r") as f:
+    with open(r"CSC1024-Assignment\books_23094907.txt", "r") as f:
         '''
         Returns all lines contained in the text file and separates every list item by line.
         '''
