@@ -10,7 +10,7 @@ from get_books import get_books
 # do we need to do some kind of open() function at the start of the program?
 
 
-def display_books():  # add sort function?
+def display_books():
     '''
     Displays header.
     '''
@@ -84,7 +84,7 @@ def display_books():  # add sort function?
         print("\n")
 
 
-def get_max_column_length(column):
+def get_max_column_length(category):
     '''
     Function to get the longest column length of the specified detail column.
     This will help to ensure that the displayed columns will not be too short nor too long even if the details are lengthened.
@@ -112,7 +112,7 @@ def get_max_column_length(column):
 
         book_details = book.split("|")
 
-        column_lengths.append(len(book_details[column]))
+        column_lengths.append(len(book_details[category]))
 
     '''
     Finds the largest number in the list of column lengths and returns it.
@@ -121,5 +121,27 @@ def get_max_column_length(column):
     max_column_length = max(column_lengths)
     return max_column_length
 
+# add sort function?
+
+
+def sort_books(category, order):
+
+    book_list = get_books()
+
+    for book in book_list:
+
+        book_details = book.split("|")
+
+        for detail in book_details:
+            pass
+
+    # return sorted_book_list
+
 
 display_books()
+
+'''
+while True:
+    if input("Sort the display? (Enter N to decline) \n").upper() == "N":
+        break
+'''
