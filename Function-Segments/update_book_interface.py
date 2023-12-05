@@ -65,7 +65,7 @@ def update_book_interface():
 
     for book in book_list:
         book_count += 1
-        isbn, author, title, publisher, genre, yoip, dop, status = book.split(
+        isbn, author, title, publisher, genre, yop, dop, status = book.split(
             "|")
         print(f"[{book_count}] | {isbn} | {
               author} | {title} | {genre} | {status}")
@@ -174,7 +174,7 @@ def update_book_interface():
 
                     for book in author_book_list:
                         book_count += 1
-                        isbn, author, title, publisher, genre, yoip, dop, status = book
+                        isbn, author, title, publisher, genre, yop, dop, status = book
 
                         print(f"[{book_count}] | {isbn} | {
                               title} | {genre} | {status}")
@@ -226,7 +226,7 @@ def update_book_interface():
                     Assigns book ISBN to user input.
                     '''
                     for book in book_list:
-                        isbn, author, title, publisher, genre, yoip, dop, status = book.split(
+                        isbn, author, title, publisher, genre, yop, dop, status = book.split(
                             "|")
                         if (author == user_input_id):
                             user_input_id = isbn
@@ -249,7 +249,7 @@ def update_book_interface():
 """)
     print("\nCongratulations! Your Input is Valid and A Book Has Been Found!\n")
     for book in book_list:
-        isbn, author, title, publisher, genre, yoip, dop, status = book.split(
+        isbn, author, title, publisher, genre, yop, dop, status = book.split(
             "|")
         if (isbn == user_input_id or author == user_input_id or title == user_input_id):
             print(f"\nBook Found: {title} by {author}")
@@ -259,13 +259,13 @@ def update_book_interface():
             print(f"Title: {title}")
             print(f"Publisher: {publisher}")
             print(f"Genre: {genre}")
-            print(f"Year of Initial Publication: {yoip}")
-            print(f"Date of Latest Publication: {dop}")
+            print(f"Year of Publication: {yop}")
+            print(f"Date of Purchase: {dop}")
             print(f"Status: {status}")
 
             print("What Details Would You Like to Update?\n")
             user_update_option = input(
-                "[1] - ISBN\n[2] - Author\n[3] - Title\n[4] - Publisher\n[5] - Genre\n[6] - Year of Initial Publication\n[7] - Date of Latest Publication\n[8] - Book Status\n\n")
+                "[1] - ISBN\n[2] - Author\n[3] - Title\n[4] - Publisher\n[5] - Genre\n[6] - Year of Publication\n[7] - Date of Purchase\n[8] - Book Status\n\n")
 
             if (user_update_option not in ['1', '2', '3', '4', '5', '6', '7', '8']):
                 if (user_error_redirect("\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4].")):
@@ -328,17 +328,22 @@ def update_book_interface():
 
                 elif (user_update_option == '6'):
                     print(
-                        f"Current Year of Initial Publication: {yoip}\n")
-                    new_yoip = input(
-                        "Please Input New Year of Initial Publication:\n")
+                        f"Current Year of Publication: {yop}\n")
+                    new_yop = input(
+                        "Please Input New Year of Publication:\n")
+                    if (len(new_yop) != 4):
+                        if (user_error_redirect(f"\nERROR: Year of Publication Should Contain EXACTLY 4 digits. Your Input Had {len(new_yop)} digits.")):
+                            update_book_interface()
+                        else:
+                            return 0
                     update_book(
-                        yoip, new_yoip, "yoip")
+                        yop, new_yop, "yop")
 
                 elif (user_update_option == '7'):
                     print(
-                        f"Current Date of Latest Publication: {dop}\n")
+                        f"Current Date of Purchase: {dop}\n")
                     new_dop = input(
-                        "Please Input New Date of Latest Publication:\n")
+                        "Please Input New Date of Purchase:\n")
                     update_book(
                         dop, new_dop, "dop")
 

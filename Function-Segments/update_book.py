@@ -17,7 +17,7 @@ def update_book(old_detail, new_detail, detail_type):
         "title": 2,
         "publisher": 3,
         "genre": 4,
-        "dow": 5,
+        "yop": 5,
         "dop": 6,
         "status": 7
     }
