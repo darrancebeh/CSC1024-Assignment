@@ -625,7 +625,7 @@ def main_user_interface():
 
     print("\nWhat Would You Like to Do?\n")
 
-    print("[1] - View All Books in Database\n[2] - Add a Book to Database\n[3] - Update a Book in Database\n[4] - Delete a Book from Database\n[5] - Background of Our Project\n[x] - Exit the Program\n\n")
+    print("[1] - View All Books in Database\n[2] - Add a Book to Database\n[3] - Update a Book in Database\n[4] - Delete a Book from Database\n[5] - Background of Our Project\n\n[x] - Exit the Program\n\n")
 
     user_input_function_option = input("Input Option Here: ")
 
