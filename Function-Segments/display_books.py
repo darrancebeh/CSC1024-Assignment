@@ -10,7 +10,7 @@ from get_books import get_books
 # do we need to do some kind of open() function at the start of the program?
 
 
-def display_books():  # add headings for columns!!!
+def display_books():  # add sort function?
     '''
     Displays header.
     '''
@@ -21,11 +21,23 @@ def display_books():  # add headings for columns!!!
 ███████║██║░░░░░██║░░░░░  ██████╦╝██║░░██║██║░░██║█████═╝░╚█████╗░
 ██╔══██║██║░░░░░██║░░░░░  ██╔══██╗██║░░██║██║░░██║██╔═██╗░░╚═══██╗
 ██║░░██║███████╗███████╗  ██████╦╝╚█████╔╝╚█████╔╝██║░╚██╗██████╔╝
-╚═╝░░╚═╝╚══════╝╚══════╝  ╚═════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝╚═════╝░''')
-    print("\n")
+╚═╝░░╚═╝╚══════╝╚══════╝  ╚═════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝╚═════╝░
+          
+          ''')
 
+    '''
+    Creates the list of categories
+    '''
     categories = ["ISBN", "AUTHOR", "TITLE", "PUBLISHER",
                   "GENRE", "YEAR PUBLISHED", "DATE PURCHASED", "STATUS"]
+
+    '''
+    The longest column length (the length of the longest detail in the column) is determined.
+    If the name of the category is longer than the longest column length, the column is widened to its length.
+    Prints the name of the category.
+
+    This is done for every category.
+    '''
 
     for category in categories:
 
@@ -44,7 +56,7 @@ def display_books():  # add headings for columns!!!
     The individual books are further split into their details.
 
     The longest column length (the length of the longest detail in the column) is determined.
-    If the length of the name of the category is longer than the longest column length, the column is widened to its length.
+    If the name of the category is longer than the longest column length, the column is widened to its length.
 
     Then, the detail is printed in a consistently-sized space.
     This is done for every detail of the book.
