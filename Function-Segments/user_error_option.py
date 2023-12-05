@@ -9,6 +9,14 @@ def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
+'''
+message - Error message to be displayed to user.
+Should look something like this: f"ERROR: An ISBN Should Contain EXACTLY 13 Digits. You Entered {isbn} Which Contained {len(isbn) Digits.}"
+When calling, it should look something like:
+user_error_redirect(f"ERROR: An ISBN Should Contain EXACTLY 13 Digits. You Entered {isbn} Which Contained {len(isbn) Digits.}")
+'''
+
+
 def user_error_redirect(message):
     '''
     Clears screen for visibility and displays error header.
