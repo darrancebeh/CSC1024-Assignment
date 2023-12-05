@@ -175,8 +175,36 @@ def team_background():
     pass
 
 
-def exit_program():
-    pass
+def exit_program(program_start_time):
+    time_now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    time_spent = datetime.datetime.strptime(
+        time_now, "%Y-%m-%d %H:%M:%S") - datetime.datetime.strptime(program_start_time, "%Y-%m-%d %H:%M:%S")
+
+    # displays time in xx Hours xx Minutes xx Seconds format
+    hours, minutes, seconds = str(time_spent).split(":")
+    print(f"You Spent {hours} Hours {minutes} Minutes {
+          seconds} Seconds using This Program.")
+    user_option_exit = input("Are You Sure You Want To Exit? (Y/N): ").upper()
+
+    '''
+    Error Handling for User Input
+    '''
+
+    while (user_option_exit != "Y" and user_option_exit != "N"):
+        print("Invalid Input. Please Input [Y]es / [N]o.")
+        user_option_exit = input(
+            "Are You Sure You Want To Exit? (Y/N): ").upper()
+
+    if (user_option_exit == "Y"):
+        print("\nExiting Program...")
+        input("Press Any Key To Exit.")
+        exit()
+
+    elif (user_option_exit == "N"):
+        print("\nReturning To Main Menu...")
+        input("Press Any Key To Continue.")
+        return False
 
 
 def add_book_interface():
@@ -615,11 +643,13 @@ def main_user_interface():
         "2": add_book_interface,
         "3": update_book_interface,
         "4": delete_book_interface,
-        "5": team_background,
-        "x": exit_program
+        "5": team_background
     }
 
-    option_to_function_identifier[user_input_function_option]()
+    if (user_input_function_option == 'x'):
+        return 0
+    else:
+        option_to_function_identifier[user_input_function_option]()
 
 
 '''
@@ -633,8 +663,18 @@ Master Function VVV
 
 
 def main():
-    initial_time_program_start = datetime.datetime.now()
+    initial_time_program_start = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     main_user_interface()
+
+    '''
+    If function returns false, it means the user changed their mind and doesn't want to exit.
+    Thus, function redirects user back to main menu.
+    The function will exit the program if user decides to exit and will not redirect back to this function.
+    '''
+
+    # calls exit_program with initial time of program start as parameter to calculate total time used in program
+    if (not exit_program(initial_time_program_start)):
+        main()
 
 
 if __name__ == "__main__":
