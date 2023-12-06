@@ -14,6 +14,8 @@ book_list = get_books()
 Function that displays each result if the matching_books list is not empty.
 Otherwise, it displays that no matching books were found.
 '''
+
+
 def display_matching_books(matching_books):
     '''
     Check if the matching_books list is not empty, then display each result.
@@ -29,11 +31,14 @@ def display_matching_books(matching_books):
     If no matching books were found, display a message.
     '''
 
+
 '''
 Function to allow the user to search for a book by ISBN, author, and/or title.
 It iterates through the book list and compiles matching books based on user input.
 Displays the results and handles ISBN-related errors.
 '''
+
+
 def search_books(book_list):
     '''
     Prompts user to input ISBN, name of author and/or title.
@@ -44,12 +49,17 @@ def search_books(book_list):
 
     '''
     Checks if there is an ISBN, author, or title input; then checks if it matches with any books in the database.
+    Assign variable names such as isbn_match for clarity.
     if input matches with any book, append to the matching_books list.
     '''
     for book in book_list:
-        if (isbn and isbn in book[0]) or (author and author.lower() in book[1].lower()) or (title and title.lower() in book[2].lower()):
+        isbn_match = isbn and isbn in book[0]
+        author_match = author and author in book[1].lower()
+        title_match = title and title in book[2].lower()
+
+        if isbn_match or author_match or title_match:
             matching_books.append(book)
-    
+
     '''
     Runs the display_matching_books function after matching_books list has been compiled.
     '''
@@ -70,5 +80,6 @@ def search_books(book_list):
                 search_books(book_list)
             else:
                 return 0
+
 
 search_books(book_list)
