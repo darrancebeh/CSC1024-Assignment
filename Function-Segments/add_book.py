@@ -1,40 +1,34 @@
-import traceback
+'''
+The 'datetime' module provides classes for manipulating dates and times in both simple and complex ways.
+By importing the 'date' class, we can easily create and manipulate date objects in our code.
+The "import traceback" statement allows us to handle and display error messages more effectively.
+'''
 from datetime import date
+import traceback
 
-    '''
-    The Book class is used to represent a book.
-    '''
-class Book:
-    def __init__(self, isbn, author, title, publisher, genre, published_year, date_purchased, status):
-        self.isbn = isbn
-        self.author = author
-        self.title = title
-        self.publisher = publisher
-        self.genre = genre
-        self.published_year = published_year
-        self.date_purchased = date_purchased
-        self.status = status
+'''
+A function named 'add_book' that accepts 9 parameters (book details) as arguments.
+'''
 
-    '''
-    The add_book() function is used to add a book to the books_23094907.txt file.
-    '''
-def add_book(new_book):
+
+def add_book(isbn, author, title, publisher, genre, published_year, date_purchased, filename):
     try:
-        with open("books_23094907.txt", 'a') as f:
+        with open(filename, 'a') as f:
             book_information = "{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}".format(
-                new_book.isbn, new_book.author, new_book.title, new_book.publisher, new_book.genre, new_book.published_year, new_book.date_purchased, new_book.status)
+                isbn, author, title, publisher, genre, published_year, date_purchased, "Book's Status")
             f.write(book_information + '\n')
         print("Book added successfully!")
     except Exception as e:
         print("Error occurred: ", e, "\n", traceback.format_exc())
 
-new_book = Book(isbn="1234567890123",
-                author="Author's Name",
-                title="Book's Title",
-                publisher="Publisher's Name",
-                genre="Genre of the Book",
-                published_year="2023",
-                date_purchased=date.strptime("10-10-2023", '%d-%m-%Y'),
-                status="Book's Status")
 
-add_book(new_book)
+'''
+A 'new_book_info' tuple that contains the book details to be added.
+'''
+new_book_info = ("1234567890123", "Author's Name", "Book's Title", "Publisher's Name",
+                 "Genre of the Book", "2023", date(2023, 10, 10), "Book's Status")
+
+'''
+A call to the 'add_book' function, passing the book details as individual arguments using the * operator.
+'''
+add_book(*new_book_info, "books_23094907.txt")
