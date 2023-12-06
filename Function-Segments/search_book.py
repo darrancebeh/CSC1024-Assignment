@@ -71,3 +71,4 @@ def search_books(book_list):
             else:
                 return 0
 
+search_books(book_list)
