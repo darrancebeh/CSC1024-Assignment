@@ -41,11 +41,11 @@ def display_books():
 
     for category in categories:
 
-        column_length = get_max_column_length(categories.index(category)) + 3
+        column_length = get_max_column_length(categories.index(category)) + 2
         # +3 to leave a little space before the next column and prevent them from being too close together.
 
         if column_length < len(category):
-            column_length = len(category) + 3
+            column_length = len(category) + 2
 
         print(f"{category: <{column_length}}", end="")
 
@@ -73,11 +73,11 @@ def display_books():
         for detail in book_details:
 
             column_length = get_max_column_length(
-                book_details.index(detail)) + 3
+                book_details.index(detail)) + 2
             # +3 to leave a little space before the next column and prevent them from being too close together.
 
             if column_length < len(categories[book_details.index(detail)]):
-                column_length = len(categories[book_details.index(detail)]) + 3
+                column_length = len(categories[book_details.index(detail)]) + 2
 
             print(f"{detail: <{column_length}}", end="")
 
