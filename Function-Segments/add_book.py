@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 def get_book_information():
     print("Please enter the following information:")
     while True:
@@ -38,9 +39,11 @@ def get_book_information():
 def add_book(book):
     with open("books_23094907.txt", 'a') as f:
         isbn, author, title, publisher, genre, published_year, date_purchased_str, status = book
-        book_information = f"{isbn}|{author}|{title}|{publisher}|{genre}|{published_year}|{date_purchased_str}|{status}"
-        f.write(book_information + '\n')
+        book_information = f"{isbn}|{author}|{title}|{publisher}|{
+            genre}|{published_year}|{date_purchased_str}|{status}"
+        f.write('\n' + book_information)
     print("Book added successfully!")
+
 
 # Example usage:
 book = get_book_information()
