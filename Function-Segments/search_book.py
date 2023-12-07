@@ -19,14 +19,41 @@ Otherwise, it displays that no matching books were found.
 def display_matching_books(matching_books):
     '''
     Check if the matching_books list is not empty, then display each result.
+    Displays header when book is found.
     '''
     if matching_books:
-        print("Matching books found:")
+        print(r"""       
+██████╗░░█████╗░░█████╗░██╗░░██╗  ███████╗░█████╗░██╗░░░██╗███╗░░██╗██████╗░██╗
+██╔══██╗██╔══██╗██╔══██╗██║░██╔╝  ██╔════╝██╔══██╗██║░░░██║████╗░██║██╔══██╗██║
+██████╦╝██║░░██║██║░░██║█████═╝░  █████╗░░██║░░██║██║░░░██║██╔██╗██║██║░░██║██║
+██╔══██╗██║░░██║██║░░██║██╔═██╗░  ██╔══╝░░██║░░██║██║░░░██║██║╚████║██║░░██║╚═╝
+██████╦╝╚█████╔╝╚█████╔╝██║░╚██╗  ██║░░░░░╚█████╔╝╚██████╔╝██║░╚███║██████╔╝██╗
+╚═════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝  ╚═╝░░░░░░╚════╝░░╚═════╝░╚═╝░░╚══╝╚═════╝░╚═╝""")
+
+        '''
+        Run the if statement when there is only 1 book that matches the input.
+        Otherwise run the elif statement if multiple books match the input.
+        Present the book in a user-friendly order.
+        '''
+
+        if len(matching_books) == 1:
+            print(f"\n 1 book matches the details you entered:")
+        elif len(matching_books) > 1:
+            print(f"\n{len(matching_books)} books match the details you entered:")
         for book in matching_books:
-            print(book)
+            print(f"\nBook Found: {book[2]} by {book[1]}")
+            print("Book Details:\n")
+            print(f"ISBN: {book[0]}")
+            print(f"Author: {book[1]}")
+            print(f"Title: {book[2]}")
+            print(f"Publisher: {book[3]}")
+            print(f"Genre: {book[4]}")
+            print(f"Year of Publication: {book[5]}")
+            print(f"Date of Purchase: {book[6]}")
+            print(f"Status: {book[7]}")
 
     else:
-        print("No matching books found.")
+        print("\nNo matching books found.\n")
     '''
     If no matching books were found, display a message.
     '''
@@ -42,7 +69,26 @@ Displays the results and handles ISBN-related errors.
 def search_books(book_list):
     '''
     Prompts user to input ISBN, name of author and/or title.
+    Displays header for the function.
     '''
+    print(r"""
+
+░██████╗███████╗░█████╗░██████╗░░█████╗░██╗░░██╗  ██████╗░░█████╗░░█████╗░██╗░░██╗
+██╔════╝██╔════╝██╔══██╗██╔══██╗██╔══██╗██║░░██║  ██╔══██╗██╔══██╗██╔══██╗██║░██╔╝
+╚█████╗░█████╗░░███████║██████╔╝██║░░╚═╝███████║  ██████╦╝██║░░██║██║░░██║█████═╝░
+░╚═══██╗██╔══╝░░██╔══██║██╔══██╗██║░░██╗██╔══██║  ██╔══██╗██║░░██║██║░░██║██╔═██╗░
+██████╔╝███████╗██║░░██║██║░░██║╚█████╔╝██║░░██║  ██████╦╝╚█████╔╝╚█████╔╝██║░╚██╗
+╚═════╝░╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝  ╚═════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝
+
+░█████╗░░█████╗░████████╗░█████╗░██╗░░░░░░█████╗░░██████╗░██╗░░░██╗███████╗
+██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██║░░░░░██╔══██╗██╔════╝░██║░░░██║██╔════╝
+██║░░╚═╝███████║░░░██║░░░███████║██║░░░░░██║░░██║██║░░██╗░██║░░░██║█████╗░░
+██║░░██╗██╔══██║░░░██║░░░██╔══██║██║░░░░░██║░░██║██║░░╚██╗██║░░░██║██╔══╝░░
+╚█████╔╝██║░░██║░░░██║░░░██║░░██║███████╗╚█████╔╝╚██████╔╝╚██████╔╝███████╗
+░╚════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚══════╝░╚════╝░░╚═════╝░░╚═════╝░╚══════╝""")
+
+    print("\n\nTo find your desired book, please provide some details below.\n")
+
     isbn = input("Enter ISBN (or leave blank): ")
     author = input("Enter name of author (or leave blank): ").lower()
     title = input("Enter book title (or leave blank): ").lower()
@@ -67,7 +113,7 @@ def search_books(book_list):
     display_matching_books(matching_books)
 
     '''
-    Section that handles ISBN-related checks and errors.
+    Section that handles checks and errors.
     '''
     if (isbn.isdigit()):
         '''
@@ -81,6 +127,24 @@ def search_books(book_list):
                 search_books(book_list)
             else:
                 return 0
+
+    if (author.isdigit()):
+        '''
+        Checks for any numbers in author input
+        '''
+        if (user_error_redirect(f"\nERROR: Author name must not include any digits.")):
+            search_books(book_list)
+        else:
+            return 0
+
+    if (title.isdigit()):
+        '''
+        Checks for any numbers in title input
+        '''
+        if (user_error_redirect(f"\nERROR: Title must not include any digits.")):
+            search_books(book_list)
+        else:
+            return 0
 
 
 search_books(book_list)
