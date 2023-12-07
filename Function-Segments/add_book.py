@@ -1,34 +1,47 @@
-'''
-The 'datetime' module provides classes for manipulating dates and times in both simple and complex ways.
-By importing the 'date' class, we can easily create and manipulate date objects in our code.
-The "import traceback" statement allows us to handle and display error messages more effectively.
-'''
-from datetime import date
-import traceback
+from datetime import datetime
 
-'''
-A function named 'add_book' that accepts 9 parameters (book details) as arguments.
-'''
+def get_book_information():
+    print("Please enter the following information:")
+    while True:
+        isbn = input("ISBN number: ")
+        if len(isbn) == 13:
+            break
+        else:
+            print("Error. ISBN number must be 13 digits long. Please try again.")
+    author = input("Author's name: ")
+    title = input("Book's title: ")
+    publisher = input("Publisher's name: ")
+    genre = input("Genre of the book: ")
+    while True:
+        published_year = input("Publishing year: ")
+        if published_year.isdigit() and int(published_year) > 0 and int(published_year) <= datetime.now().year:
+            break
+        else:
+            print(
+                "Error. Publishing year must be a positive integer and not in the future. Please try again.")
+    while True:
+        date_purchased_str = input("Date purchased in the format DD-MM-YYYY: ")
+        try:
+            date_purchased = datetime.strptime(date_purchased_str, '%d-%m-%Y')
+            if date_purchased <= datetime.now():
+                break
+            else:
+                print(
+                    "Error. The purchase date cannot be in the future. Please try again.")
+        except ValueError:
+            print("Error. The date format is incorrect. Please try again.")
+    status = input("Book's status: ")
+
+    return isbn, author, title, publisher, genre, published_year, date_purchased_str, status
 
 
-def add_book(isbn, author, title, publisher, genre, published_year, date_purchased, filename):
-    try:
-        with open(filename, 'a') as f:
-            book_information = "{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}".format(
-                isbn, author, title, publisher, genre, published_year, date_purchased, "Book's Status")
-            f.write(book_information + '\n')
-        print("Book added successfully!")
-    except Exception as e:
-        print("Error occurred: ", e, "\n", traceback.format_exc())
+def add_book(book):
+    with open("books_23094907.txt", 'a') as f:
+        isbn, author, title, publisher, genre, published_year, date_purchased_str, status = book
+        book_information = f"{isbn}|{author}|{title}|{publisher}|{genre}|{published_year}|{date_purchased_str}|{status}"
+        f.write(book_information + '\n')
+    print("Book added successfully!")
 
-
-'''
-A 'new_book_info' tuple that contains the book details to be added.
-'''
-new_book_info = ("1234567890123", "Author's Name", "Book's Title", "Publisher's Name",
-                 "Genre of the Book", "2023", date(2023, 10, 10), "Book's Status")
-
-'''
-A call to the 'add_book' function, passing the book details as individual arguments using the * operator.
-'''
-add_book(*new_book_info, "books_23094907.txt")
+# Example usage:
+book = get_book_information()
+add_book(book)
