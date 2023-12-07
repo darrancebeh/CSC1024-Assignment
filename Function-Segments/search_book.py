@@ -53,6 +53,7 @@ def search_books(book_list):
     if input matches with any book, append to the matching_books list.
     '''
     for book in book_list:
+        book = book.split("|")
         isbn_match = isbn and isbn in book[0]
         author_match = author and author in book[1].lower()
         title_match = title and title in book[2].lower()
