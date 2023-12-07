@@ -1,3 +1,4 @@
+
 from get_books import get_books
 
 def delete_book():
@@ -10,19 +11,39 @@ def delete_book():
     '''
     book_list = get_books()
 
-    search_book = input("Enter book information: ")
+    while True:
+        # Display all books
+        print("Current Book List:")
+        for book in book_list:
+            print(book)
 
-    # Use list comprehension to create a new list without the matching items
-    filtered_book_list = [book for book in book_list if search_book not in book]
+        # Prompt user for input of isbn, author, or title for the book they want to delete
+        search_book = input("Enter ISBN, author, or title of the book you want to delete: ")
 
-    if filtered_book_list != book_list:
-        print(f"The character '{search_book}' was present in the following books and has been removed:")
-        for index, item in enumerate(book_list):
-            if item not in filtered_book_list:
-                print(f"Index {index}: {item}")
+        # Error handling for isbn/author/title input
+        if not search_book:
+            print("Invalid input. Please enter ISBN, author, or title.")
+            continue
 
-        book_list = filtered_book_list  # Update the original list with the filtered list
-    else:
-        print(f"The character '{search_book}' is not present in any of the books.")
+        # Use list comprehension to create a new list without the matching items
+        filtered_book_list = [book for book in book_list if search_book.lower() not in book.lower()]
 
-    print("Updated Book List:", book_list)
+        if filtered_book_list != book_list:
+            print(f"The information '{search_book}' was present in the following books and has been removed:")
+            for item in book_list:
+                if item not in filtered_book_list:
+                    print(item)
+
+            # Update the original list with the filtered list
+            book_list = filtered_book_list
+        else:
+            print(f"The information '{search_book}' is not present in any of the books.")
+
+        # Ask the user whether they want to delete another book
+        another_deletion = input("Do you want to delete another book? (yes/no): ").lower()
+        if another_deletion != 'yes':
+            break
+
+    print("Updated Book List:")
+    for book in book_list:
+        print(book)
