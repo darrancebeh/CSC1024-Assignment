@@ -4,9 +4,9 @@
 '''
 from datetime import datetime
 
-
 '''
 - The 'def check_isbn(isbn)' is responsible for checking existing ISBNs. 
+- It checks books_23094907.txt in read mode for similarities. 
 '''
 
 
@@ -63,9 +63,13 @@ def add_book_information():
         else:
             print("Error. Publishing year must be a 4-digit positive integer and not in the future. Please try again.")
     while True:
-        date_purchased_str = input("Date purchased in the format DD-MM-YYYY: ")
+        date_purchased_str = input("Date purchased in the format DD/MM/YYYY: ")
+        if len(date_purchased_str) != 10:
+            print(
+                "Error. The date must be exactly 10 characters long in the format DD/MM/YYYY. Please try again.")
+            continue
         try:
-            date_purchased = datetime.strptime(date_purchased_str, '%d-%m-%Y')
+            date_purchased = datetime.strptime(date_purchased_str, '%d/%m/%Y')
             if date_purchased <= datetime.now() and date_purchased > published_date:
                 break
             else:
@@ -110,7 +114,5 @@ def add_book(book):
 - Calls the 'add_book_information()' function to collect book information from the user.
 - Collected information is then passed to the 'add_book()' function to add the book to the 'books_23094907.txt' file.
 '''
-
-
 book = add_book_information()
 add_book(book)
