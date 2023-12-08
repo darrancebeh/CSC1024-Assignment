@@ -1,3 +1,14 @@
+import os
+import datetime
+
+
+def clear():
+    '''
+    Clears the screen of the terminal.
+    '''
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
 def main_user_interface():
     '''
     Calls the clear function to clear the screen for better visiblity.
