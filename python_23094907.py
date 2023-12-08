@@ -285,7 +285,7 @@ def main_user_interface():
             "Input Option Here: ")
 
     option_to_function_identifier = {
-        "1": display_book_interface,
+        "1": display_books,
         "2": search_book,
         "3": add_book_interface,
         "4": update_book_interface,
