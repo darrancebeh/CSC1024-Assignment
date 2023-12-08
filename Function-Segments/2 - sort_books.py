@@ -1,5 +1,5 @@
-from get_books import get_books
-from display_books import get_max_column_length
+from aux1_get_books import get_books
+from f1_display_books import get_max_column_length
 
 # This whole sorting function is meant to be called after display_books()
 

@@ -51,7 +51,8 @@ def add_book(book):
     if book is not None:
         with open("books_23094907.txt", 'a') as f:
             isbn, author, title, publisher, genre, published_year, date_purchased_str, status = book
-            book_information = f"{isbn}|{author}|{title}|{publisher}|{genre}|{published_year}|{date_purchased_str}|{status}"
+            book_information = f"{isbn}|{author}|{title}|{publisher}|{
+                genre}|{published_year}|{date_purchased_str}|{status}"
             f.write(book_information + '\n')
         print("Book added successfully!")
 

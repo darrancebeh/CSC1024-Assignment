@@ -1,4 +1,4 @@
-from get_books import get_books
+from aux1_get_books import get_books
 
 '''
 When using this function in Function Segments, both display_books and get_max_column_length have to be imported from this file.
