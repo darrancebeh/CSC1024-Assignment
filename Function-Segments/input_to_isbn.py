@@ -172,4 +172,18 @@ def input_to_isbn():
                             "|")
                         if (author == user_input_id):
                             user_input_id = isbn
+
+            else:
+                '''
+                If user inputted title,
+                Run through book list to find book with same title.
+                Assigns book ISBN to user input.
+                '''
+
+                for book in book_list:
+                    isbn, author, title, publisher, genre, yop, dop, status = book.split(
+                        "|")
+                    if (title == user_input_id):
+                        user_input_id = isbn
+
     return user_input_id
