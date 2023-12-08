@@ -1,23 +1,16 @@
-from get_books import get_books
-from input_to_isbn import input_to_isbn
+from aux1_get_books import get_books
+from aux4_input_to_isbn import input_to_isbn
+from f1_display_books import display_books
+from aux5_isbn_to_details import isbn_to_details
 
 
 def delete_book_interface():
 
     book_list = get_books()
 
-    for book in book_list:
-        print(book)
+    display_books()
 
-    user_input_id = input_to_isbn()
-
-    if (user_input_id == 1):
-        delete_book_interface()
-    elif (user_input_id == 0):
-        print("Main Menu Function haha")
-        exit()
-
-    delete_book(user_input_id)
+    delete_book(isbn_to_details(input_to_isbn()))
 
 
 def delete_book(isbn):

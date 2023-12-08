@@ -1,6 +1,6 @@
-from get_books import get_books
-from user_error_option import user_error_redirect
-from check_author_multiple_book import check_author_multiple_book
+from aux1_get_books import get_books
+from aux3_user_error_option import user_error_redirect
+from aux2_check_author_multiple_book import check_author_multiple_book
 
 
 def input_to_isbn():

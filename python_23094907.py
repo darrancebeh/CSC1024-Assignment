@@ -271,7 +271,7 @@ def main_user_interface():
 
     print("\nWhat Would You Like to Do?\n")
 
-    print("[1] - View All Books in Database\n[2] - Add a Book to Database\n[3] - Update a Book in Database\n[4] - Delete a Book from Database\n[5] - Background of Our Project\n\n[x] - Exit the Program\n\n")
+    print("[1] - View All Books in Database\n[2] - Search for a Book a Database\n[3] - Add a Book to Database\n[4] - Update a Book in Database\n[5] - Delete a Book in Database\n[6] - Display Team Background\n[x] - Exit Program\n\n")
 
     user_input_function_option = input("Input Option Here: ")
 
@@ -279,17 +279,18 @@ def main_user_interface():
     Error handling for user input if input is not in the options.
     '''
 
-    while (user_input_function_option not in ['1', '2', '3', '4', '5', 'x']):
+    while (user_input_function_option not in ['1', '2', '3', '4', '5', '6', 'x']):
         print("\nInvalid Input Detected. Please Try Again.")
         user_input_function_option = input(
             "Input Option Here: ")
 
     option_to_function_identifier = {
-        "1": display_book_interface,
-        "2": add_book_interface,
-        "3": update_book_interface,
-        "4": delete_book_interface,
-        "5": team_background
+        "1": display_books,
+        "2": search_book,
+        "3": add_book_interface,
+        "4": update_book_interface,
+        "5": delete_book_interface,
+        "6": team_background
     }
 
     if (user_input_function_option == 'x'):
@@ -321,6 +322,8 @@ def main():
     # calls exit_program with initial time of program start as parameter to calculate total time used in program
     if (not exit_program(initial_time_program_start)):
         main()
+    else:
+        return None
 
 
 if __name__ == "__main__":

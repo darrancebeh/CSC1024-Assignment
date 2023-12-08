@@ -1,8 +1,8 @@
-from get_books import get_books
-from user_error_option import user_error_redirect
-from input_to_isbn import input_to_isbn
-from display_books import display_books
-from isbn_to_details import isbn_to_details
+from aux1_get_books import get_books
+from aux3_user_error_option import user_error_redirect
+from aux4_input_to_isbn import input_to_isbn
+from f1_display_books import display_books
+from aux5_isbn_to_details import isbn_to_details
 
 
 def search_books():
