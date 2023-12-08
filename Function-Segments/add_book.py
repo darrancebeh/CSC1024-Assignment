@@ -10,7 +10,7 @@ from datetime import datetime
 - Naming convention taken into consideration as people from different cultures have different naming conventions, such as umlauts and ligatures.
 - Also performs validation checks for the ISBN number to detect for existing matching books.
 '''
-def get_book_information():
+def add_book_information():
     print("Please enter the following information:")
     while True:
         isbn = input("ISBN number: ")
@@ -74,8 +74,8 @@ def add_book(book):
     print("Book added successfully!")
 
 '''
-- Calls the 'get_book_information()' function to collect book information from the user.
+- Calls the 'add_book_information()' function to collect book information from the user.
 - Collected information is then passed to the 'add_book()' function to add the book to the 'books_23094907.txt' file.
 '''
-book = get_book_information()
+book = add_book_information()
 add_book(book)
