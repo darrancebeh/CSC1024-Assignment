@@ -286,7 +286,7 @@ def main_user_interface():
 
     option_to_function_identifier = {
         "1": display_book_interface,
-        "2": search_book_interface,
+        "2": search_book,
         "3": add_book_interface,
         "4": update_book_interface,
         "5": delete_book_interface,
