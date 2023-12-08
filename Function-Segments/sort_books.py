@@ -1,63 +1,95 @@
 from get_books import get_books
 from display_books import get_max_column_length
 
-# This whole sorting function is meant to be called after display_books()
+# This whole sorting function is meant to be called after display_books().
+# Seems like uncapitalised author names are sorted as last when sorted in ascending order, and vice versa.
 
 
-########## Work in (a lot of) progress ##########
-# REMEMBER to put proper documentation later
-#
-
-
-def make_each_book_into_a_sublist():  # should probably change the function name
+def turn_books_into_sublists():
     '''
     The book list is split into individual books.
+    An empty list 'book_superlist' is created to store the books as sublists.
     '''
 
     book_list = get_books()
-    list_with_books_as_sublists = []
+    book_superlist = []
+
+    '''
+    For every book in the unsorted list, the details in the form of a single element are separated into individual elements in a sublist.
+        ie: "9781668026038|Hannah Grace|..."
+            turns into:
+            ["9781668026038","Hannah Grace",...]
+
+    The book, now in sublist form, is appended to 'book_superlist'.
+    This is done for every book.
+        ie: []
+            turns into:
+            [["9781668026038","Hannah Grace",...]]
+            then:
+            [["9781668026038","Hannah Grace",...],["9780063052734","Danya Kukafka",...]]
+            and so on.
+    '''
 
     for book in book_list:
 
         book_details = book.split("|")
-        list_with_books_as_sublists.append(book_details)
 
-    return list_with_books_as_sublists
-
-
-def sort_books(category, order):
-
-    list_with_books_as_sublists = make_each_book_into_a_sublist()
+        book_superlist.append(book_details)
 
     '''
-    Sorts the big list of books according to arguments 'category' and 'order'.
+    Returns the book list consisting of only sublists and no elements.
     '''
-    sorted_list = sorted(list_with_books_as_sublists,
-                         key=lambda x: x[category], reverse=order)
+
+    return book_superlist
+
+
+def sort_book_superlist(category, order):
+    '''
+    Gets superlist of books in sublist form.
+    '''
+    book_superlist = turn_books_into_sublists()
+
+    '''
+    Sorts the superlist of books according to arguments 'category' and 'order'.
+    '''
+    sorted_superlist = sorted(book_superlist,
+                              key=lambda x: x[category], reverse=order)
     '''
     Returns the sorted list.
     '''
-    return sorted_list
+    return sorted_superlist
 
 
-def turn_into_single_list(sorted_list):
+def turn_superlist_into_single_list(sorted_superlist):
     '''
-    Makes empty list named single_list.
+    Makes empty list named single_list to store all the books as elements.
     '''
     single_list = []
 
     '''
-    For every book in the sorted list, the book details are joined together, transforming from a sublist of details into one element of details separated by "|".
-        ie: [["9781668026038","Hannah Grace",...]["9780063052734","Danya Kukafka",...]]
-            turns into
-            ["9781668026038|Hannah Grace|...","9780063052734|Danya Kukafka|..."]
+    For every book in the sorted list, the book details are joined together, transforming from a sublist of details into one element of details separated by '|'.
+        ie: ["9781668026038","Hannah Grace",...]
+            turns into:
+            "9781668026038|Hannah Grace|..."
 
+    The book, now in element form, is appended to 'single_list'.
+    This is done for every book.
+        ie: []
+            turns into:
+            ["9781668026038|Hannah Grace|..."]
+            then:
+            ["9781668026038|Hannah Grace|...","9780063052734|Danya Kukafka|..."]
+            and so on.
     '''
-    for book_as_sublist in sorted_list:
+    for book_as_sublist in sorted_superlist:
 
         book = "|".join(book_as_sublist)
 
         single_list.append(book)
+
+    '''
+    Returns the book list consisting of only elements and no sublists.
+    '''
 
     return single_list
 
@@ -136,39 +168,131 @@ def display_sorted_books(single_sorted_list):
         print("\n")
 
 
-'''
-↓ MAIN INTERACTABLE-ISH CODE ↓
-'''
+def input_check(inp, accepted_range):
+    '''
+    Checks if inp is in accepted_range.
+    If yes, returns ok = 1.
+    If not, returns ok = 0.
+    '''
+    if inp in accepted_range:
+        ok = 1
+
+    else:
+        ok = 0
+
+    return ok
 
 
-def sort_books():
-    # CANNOT handle input errors at all yet
-    # Also unknown what will happen if there are duplicate copies but different date purchased/status
+def ask_sort_books():
+    '''
+    Loop to repeatedly ask user if they want to sort the display of books.
+
+    If 'n' or 'N' is entered, breaks the loop.
+    If anything else is entered, continues on with sorting options.
+    '''
     while True:
 
-        if input("Sort the display? (Enter N to decline or anything else to accept) \n").upper() == "N":
+        if input("-----------------------------------------------------------------\nSort the display? (Enter N to decline or anything else to accept) \n").upper() == "N":
             break
 
-        category_input = int(input(r'''
-    Sort by:
-    ISBN [1]
-    Author [2]
-    Title [3]
-    Publisher [4]
-    Genre [5]
-    Year Published [6]
-    Date Purchased [7]
-    Status [8]
-    '''))
+        '''
+        Checks if input is an integer.
+        If not, prints "Error, please try again."
+        '''
 
-        order_input = int(input(r'''          
-    Ascending order (A→Z/0→9) [1]
-    Descending order (Z→A/9→0) [2]
-    '''))
+        try:
 
-        category = category_input - 1  # from 0-7
-        order = order_input - 1  # from 0-1 (True/False)
+            category_input = int(input(r'''
+Sort by:
+ISBN [1]
+Author [2]
+Title [3]
+Publisher [4]
+Genre [5]
+Year Published [6]
+Status [7]
+'''))
 
-        sorted_list = sort_books(category, order)
-        single_sorted_list = turn_into_single_list(sorted_list)
-        display_sorted_books(single_sorted_list)
+        except:
+
+            print("Error, please try again.")
+
+        else:
+
+            '''
+            Checks if input is an element in the list [1, 2, 3, 4, 5, 6, 7].
+            If not, prints "Error: not an available option."
+            '''
+            ok = input_check(category_input, [1, 2, 3, 4, 5, 6, 7])
+
+            if ok == 0:
+                print("Error: not an available option.")
+
+            else:
+
+                '''
+                If 'category_input' is from 1 to 6, sets variable 'category' to 'category_input' minus 1.
+                This is done in order to match with the indexes of the categories.
+
+                eg: The index of ISBN in a book sublist is 0. 'category_input' is 1. 'category' = 0.
+                    Later on, in the function sort_book_superlist(category, order), category is set to 0, referring to the ISBN detail.
+
+                Here, 'category' only goes from 0 to 5.
+                '''
+                if category_input <= 6:
+                    category = category_input - 1
+
+                    '''
+                If 'category_input' is 7, sets variable 'category' to 7.
+
+                The index of Status in a book sublist is 7. 
+                The index of Date Purchased, 6, is skipped because it cannot be sorted properly.
+                    '''
+
+                elif category_input == 7:
+                    category = 7
+
+                '''
+                Checks if input is an integer.
+                If not, prints "Error, please try again."
+                '''
+                try:
+
+                    order_input = int(input(r'''          
+Ascending order (A→Z/0→9) [1]
+Descending order (Z→A/9→0) [2]
+'''))
+
+                except:
+
+                    print("Error, please try again.")
+
+                else:
+
+                    '''
+                    Checks if input is an element in the list [1, 2].
+                    If not, prints "Error: not an available option."
+                    '''
+                    ok = input_check(order_input, [1, 2])
+
+                    if ok == 0:
+                        print("Error: not an available option.")
+
+                    else:
+                        '''
+                        'order' is set to 'order_input' minus 1 in order to match with 0 and 1.
+                        This is done to decide if the list should be sorted in the ascending or descending order in the sort_book_superlist(category, order) function.
+                        0 = ascending order, because reverse=0.
+                        1 = descending order, because reverse=1.
+                        '''
+                        order = order_input - 1
+
+                        '''
+                        The book superlist is created and sorted according to the user-selected category and order.
+                        The book superlist is turned into a single list with books as elements.
+                        The sorted book list is displayed.
+                        '''
+                        sorted_superlist = sort_book_superlist(category, order)
+                        single_sorted_list = turn_superlist_into_single_list(
+                            sorted_superlist)
+                        display_sorted_books(single_sorted_list)
