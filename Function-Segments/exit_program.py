@@ -25,9 +25,9 @@ def exit_program(program_start_time):
     if (user_option_exit == "Y"):
         print("\nExiting Program...")
         input("Press Any Key To Exit.")
-        exit()
+        return True
 
     elif (user_option_exit == "N"):
         print("\nReturning To Main Menu...")
         input("Press Any Key To Continue.")
-        return 0
+        return False
