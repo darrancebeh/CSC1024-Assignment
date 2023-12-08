@@ -5,12 +5,12 @@
 from datetime import datetime
 
 '''
-- The 'def check_isbn(isbn)' is responsible for checking existing ISBNs. 
+- The 'def check_isbn_duplicate(isbn)' is responsible for checking existing ISBNs. 
 - It checks books_23094907.txt in read mode for similarities. 
 '''
 
 
-def check_isbn(isbn):
+def check_isbn_duplicate(isbn):
     with open("books_23094907.txt", 'r') as f:
         for line in f:
             if line.split('|')[0] == isbn:
@@ -31,7 +31,7 @@ def add_book_information():
     while True:
         isbn = input("ISBN number: ")
         if len(isbn) == 13 and isbn.isdigit():
-            if check_isbn(isbn):
+            if check_isbn_duplicate(isbn):
                 print("Error. A book with this ISBN already exists.")
                 continue
             else:
@@ -105,7 +105,8 @@ def add_book_information():
 def add_book(book):
     with open("books_23094907.txt", 'a') as f:
         isbn, author, title, publisher, genre, published_year, date_purchased_str, status = book
-        book_information = f"{isbn}|{author}|{title}|{publisher}|{genre}|{published_year}|{date_purchased_str}|{status}"
+        book_information = f"{isbn}|{author}|{title}|{publisher}|{
+            genre}|{published_year}|{date_purchased_str}|{status}"
         f.write('\n' + book_information)
     print("Book added successfully!")
 
