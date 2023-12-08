@@ -235,35 +235,37 @@ def display_sorted_books(single_sorted_list):
 
 display_books()
 
-already_sorted = 0
 
-# CANNOT handle input errors at all yet
-# Also unknown what will happen if there are duplicate copies but different date purchased/status
-while already_sorted == 0:
+def sort_books():
+    already_sorted = 0
 
-    if input("Sort the display? (Enter N to decline or anything else to accept) \n").upper() == "N":
-        break
+    # CANNOT handle input errors at all yet
+    # Also unknown what will happen if there are duplicate copies but different date purchased/status
+    while already_sorted == 0:
 
-    category_input = int(input(r'''
-Sort by:
-ISBN [1]
-Author [2]
-Title [3]
-Publisher [4]
-Genre [5]
-Year Published [6]
-Date Purchased [7]
-Status [8]
-'''))
+        if input("Sort the display? (Enter N to decline or anything else to accept) \n").upper() == "N":
+            break
 
-    order_input = int(input(r'''          
-Ascending order (A→Z/0→9) [1]
-Descending order (Z→A/9→0) [2]
-'''))
+        category_input = int(input(r'''
+    Sort by:
+    ISBN [1]
+    Author [2]
+    Title [3]
+    Publisher [4]
+    Genre [5]
+    Year Published [6]
+    Date Purchased [7]
+    Status [8]
+    '''))
 
-    category = category_input - 1  # from 0-7
-    order = order_input - 1  # from 0-1 (True/False)
+        order_input = int(input(r'''          
+    Ascending order (A→Z/0→9) [1]
+    Descending order (Z→A/9→0) [2]
+    '''))
 
-    sorted_list = sort_books(category, order)
-    single_sorted_list = turn_into_single_list(sorted_list)
-    display_sorted_books(single_sorted_list)
+        category = category_input - 1  # from 0-7
+        order = order_input - 1  # from 0-1 (True/False)
+
+        sorted_list = sort_books(category, order)
+        single_sorted_list = turn_into_single_list(sorted_list)
+        display_sorted_books(single_sorted_list)
