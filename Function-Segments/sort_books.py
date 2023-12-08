@@ -1,11 +1,68 @@
 from get_books import get_books
+from display_books import get_max_column_length
 
-'''
-When using this function in Function Segments, both display_books and get_max_column_length have to be imported from this file.
-'''
+# This whole sorting function is meant to be called after display_books()
 
 
-def display_books():
+########## Work in (a lot of) progress ##########
+# REMEMBER to put proper documentation later
+#
+
+
+def make_each_book_into_a_sublist():  # should probably change the function name
+    '''
+    The book list is split into individual books.
+    '''
+
+    book_list = get_books()
+    list_with_books_as_sublists = []
+
+    for book in book_list:
+
+        book_details = book.split("|")
+        list_with_books_as_sublists.append(book_details)
+
+    return list_with_books_as_sublists
+
+
+def sort_books(category, order):
+
+    list_with_books_as_sublists = make_each_book_into_a_sublist()
+
+    '''
+    Sorts the big list of books according to arguments 'category' and 'order'.
+    '''
+    sorted_list = sorted(list_with_books_as_sublists,
+                         key=lambda x: x[category], reverse=order)
+    '''
+    Returns the sorted list.
+    '''
+    return sorted_list
+
+
+def turn_into_single_list(sorted_list):
+    '''
+    Makes empty list named single_list.
+    '''
+    single_list = []
+
+    '''
+    For every book in the sorted list, the book details are joined together, transforming from a sublist of details into one element of details separated by "|".
+        ie: [["9781668026038","Hannah Grace",...]["9780063052734","Danya Kukafka",...]]
+            turns into
+            ["9781668026038|Hannah Grace|...","9780063052734|Danya Kukafka|..."]
+
+    '''
+    for book_as_sublist in sorted_list:
+
+        book = "|".join(book_as_sublist)
+
+        single_list.append(book)
+
+    return single_list
+
+
+def display_sorted_books(single_sorted_list):
     '''
     Displays header.
     '''
@@ -59,7 +116,7 @@ def display_books():
     A newline is created to separate each book, and the process repeats for each book.
     '''
 
-    book_list = get_books()
+    book_list = single_sorted_list
 
     for book in book_list:
 
@@ -79,39 +136,39 @@ def display_books():
         print("\n")
 
 
-def get_max_column_length(category):
-    '''
-    Function to get the longest column length of the specified detail column.
-    This will help to ensure that the displayed columns will not be too short nor too long even if the details are lengthened.
-    '''
+'''
+↓ MAIN INTERACTABLE-ISH CODE ↓
+'''
 
-    '''
-    Makes an empty list of the lengths of all the items in the specified detail column.
-    '''
 
-    column_lengths = []
+def sort_books():
+    # CANNOT handle input errors at all yet
+    # Also unknown what will happen if there are duplicate copies but different date purchased/status
+    while True:
 
-    '''
-    The book list is split into individual books.
-    The length of the specified detail for each book is put into the list.
+        if input("Sort the display? (Enter N to decline or anything else to accept) \n").upper() == "N":
+            break
 
-    eg: column = 1 refers to the 'author' column.
-        The length of 'Yasha Levine' is 12.
-        12 is added into the list.
-        This is done for every book.
-    '''
+        category_input = int(input(r'''
+    Sort by:
+    ISBN [1]
+    Author [2]
+    Title [3]
+    Publisher [4]
+    Genre [5]
+    Year Published [6]
+    Date Purchased [7]
+    Status [8]
+    '''))
 
-    book_list = get_books()
+        order_input = int(input(r'''          
+    Ascending order (A→Z/0→9) [1]
+    Descending order (Z→A/9→0) [2]
+    '''))
 
-    for book in book_list:
+        category = category_input - 1  # from 0-7
+        order = order_input - 1  # from 0-1 (True/False)
 
-        book_details = book.split("|")
-
-        column_lengths.append(len(book_details[category]))
-
-    '''
-    Finds the largest number in the list of column lengths and returns it.
-    '''
-
-    max_column_length = max(column_lengths)
-    return max_column_length
+        sorted_list = sort_books(category, order)
+        single_sorted_list = turn_into_single_list(sorted_list)
+        display_sorted_books(single_sorted_list)
