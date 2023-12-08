@@ -299,5 +299,20 @@ def update_book_interface():
                 update_book(
                     status, new_status, "status")
 
+    print("\nYour Inputted Details are The Same as The Previous Details. Thus, No Changes Will Be Made.")
+    print("\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n")
+    user_input_option = input("[1] - Yes\n[2] - No\n\n")
+
+    while (user_input_option not in ["1", "2"]):
+        # error handling: asks user for input again if input is invalid
+        print("\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n")
+        user_input_option = input(
+            "[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n")
+
+    if (user_input_option == "1"):
+        update_book_interface()
+    else:
+        return 0
+
 
 update_book_interface()
