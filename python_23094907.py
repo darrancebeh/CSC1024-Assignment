@@ -932,6 +932,10 @@ def update_book(isbn, old_detail, new_detail, detail_type):
 
     with open("books_23094907.txt", "w") as f:
         f.write("\n".join(book_list))
+    
+    print("\nBook Updated Successfully!")
+    input("Press Any Key To Continue.")
+    return 0
 
 
 #Functional Requirement 5 - Delete Book Record(s) 
