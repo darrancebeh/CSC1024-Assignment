@@ -1,7 +1,6 @@
 from aux1_get_books import get_books
 from aux4_input_to_isbn import input_to_isbn
 from f1_display_books import display_books
-from aux5_isbn_to_details import isbn_to_details
 
 import os
 
