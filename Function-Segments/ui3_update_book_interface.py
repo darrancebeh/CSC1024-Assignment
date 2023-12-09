@@ -10,21 +10,22 @@ from aux5_isbn_to_details import isbn_to_details
 
 
 def clear():
-    '''
+    """
     Clears the Screen for better visibility.
-    '''
+    """
 
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 def update_book_interface():
-    '''
+    """
     Calls the clear function to clear the screen for better visiblity.
     Displays header for the function. (Book Update)
-    '''
+    """
 
     clear()
-    print(r"""
+    print(
+        r"""
 ██████╗░░█████╗░░█████╗░██╗░░██╗  ██╗░░░██╗██████╗░██████╗░░█████╗░████████╗███████╗
 ██╔══██╗██╔══██╗██╔══██╗██║░██╔╝  ██║░░░██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
 ██████╦╝██║░░██║██║░░██║█████═╝░  ██║░░░██║██████╔╝██║░░██║███████║░░░██║░░░█████╗░░
@@ -36,43 +37,50 @@ def update_book_interface():
 ██║██╔██╗██║░░░██║░░░█████╗░░██████╔╝█████╗░░███████║██║░░╚═╝█████╗░░
 ██║██║╚████║░░░██║░░░██╔══╝░░██╔══██╗██╔══╝░░██╔══██║██║░░██╗██╔══╝░░
 ██║██║░╚███║░░░██║░░░███████╗██║░░██║██║░░░░░██║░░██║╚█████╔╝███████╗
-╚═╝╚═╝░░╚══╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚══════╝""")
+╚═╝╚═╝░░╚══╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚══════╝"""
+    )
 
     print("\nWelcome to the Book Updating Interface!\n")
 
-    '''
+    """
     Displays all books in database.
     Allows user to clearly know what books are in the database and what details to update.
-    '''
+    """
     display_books()
 
-    '''
+    """
     Prompts user to input ISBN, author or title.
-    '''
+    """
 
     print("_____________________________________")
     print(f"\nAll Books Have Been Displayed.\n")
-    print("To Edit an Item, Please Input the Item's 13-digit ISBN, Author OR Book Title.\n")
+    print(
+        "To Edit an Item, Please Input the Item's 13-digit ISBN, Author OR Book Title.\n"
+    )
 
     book_details = isbn_to_details(input_to_isbn())
 
-    '''
+    """
     If user input is valid,
     Run through book list to find book with same ISBN, author or title.
     Displays details of books and prompts user input for what details to update.
     Also Clears screen for better visibility.
-    '''
+    """
 
     clear()
-    print(r"""       
+    print(
+        r"""       
 ██████╗░░█████╗░░█████╗░██╗░░██╗  ███████╗░█████╗░██╗░░░██╗███╗░░██╗██████╗░██╗
 ██╔══██╗██╔══██╗██╔══██╗██║░██╔╝  ██╔════╝██╔══██╗██║░░░██║████╗░██║██╔══██╗██║
 ██████╦╝██║░░██║██║░░██║█████═╝░  █████╗░░██║░░██║██║░░░██║██╔██╗██║██║░░██║██║
 ██╔══██╗██║░░██║██║░░██║██╔═██╗░  ██╔══╝░░██║░░██║██║░░░██║██║╚████║██║░░██║╚═╝
 ██████╦╝╚█████╔╝╚█████╔╝██║░╚██╗  ██║░░░░░╚█████╔╝╚██████╔╝██║░╚███║██████╔╝██╗
 ╚═════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝  ╚═╝░░░░░░╚════╝░░╚═════╝░╚═╝░░╚══╝╚═════╝░╚═╝
-""")
-    print("\nCongratulations! Your Input is Valid and A Book Has Been Found!\n")
+"""
+    )
+    print(
+        "\nCongratulations! Your Input is Valid and A Book Has Been Found!\n"
+    )
 
     # gets all books in database
     book_list = get_books()
@@ -81,10 +89,17 @@ def update_book_interface():
     isbn_list = []
 
     for book in book_list:
-
         # temp variables assigned because we only use this for loop to search for the specific user-inputted book
-        temp_isbn, temp_author, temp_title, temp_publisher, temp_genre, temp_yop, temp_dop, temp_status = book.split(
-            "|")
+        (
+            temp_isbn,
+            temp_author,
+            temp_title,
+            temp_publisher,
+            temp_genre,
+            temp_yop,
+            temp_dop,
+            temp_status,
+        ) = book.split("|")
 
         # adds every book's isbn into isbn_list to check for duplicates
         isbn_list.append(temp_isbn)
@@ -114,202 +129,224 @@ def update_book_interface():
     print("\n\nWhat Details Would You Like to Update?\n")
 
     user_update_option = input(
-        "[1] - ISBN\n[2] - Author\n[3] - Title\n[4] - Publisher\n[5] - Genre\n[6] - Year of Publication\n[7] - Date of Purchase\n[8] - Book Status\n\n")
+        "[1] - ISBN\n[2] - Author\n[3] - Title\n[4] - Publisher\n[5] - Genre\n[6] - Year of Publication\n[7] - Date of Purchase\n[8] - Book Status\n\n"
+    )
 
-    if (user_update_option not in ['1', '2', '3', '4', '5', '6', '7', '8']):
-        if (user_error_redirect("\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4].")):
+    if user_update_option not in [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+    ]:
+        if user_error_redirect(
+            "\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4]."
+        ):
             update_book_interface()
         else:
             return 0
 
     else:
-        if (user_update_option == '1'):
-            new_isbn = input(
-                "Please Input New ISBN (13 Digits):\n")
+        if user_update_option == "1":
+            new_isbn = input("Please Input New ISBN (13 Digits):\n")
 
-            if (len(new_isbn) != 13):
-                if (user_error_redirect(f"\nERROR: ISBN Should Contain EXACTLY 13 digits. Your Input Had {len(new_isbn)} digits.")):
+            if len(new_isbn) != 13:
+                if user_error_redirect(
+                    f"\nERROR: ISBN Should Contain EXACTLY 13 digits. Your Input Had {len(new_isbn)} digits."
+                ):
                     update_book_interface()
                 else:
                     return 0
             else:
-
-                '''
+                """
                 If the user inputted new detail is the same as the old detail. Display message and informs user that no changes will be made.
                 The same applies for the other details.
-                '''
+                """
 
-                if (new_isbn == isbn):
+                if new_isbn == isbn:
                     print(
-                        f"\nThe New Inputted ISBN is the Same as the Old ISBN. No Changes Will Be Made.")
+                        f"\nThe New Inputted ISBN is the Same as the Old ISBN. No Changes Will Be Made."
+                    )
                 else:
-
-                    '''
+                    """
                     If user inputs a new ISBN that already exists in the database,
                     returns an error message and redirects user to input error handling function.
-                    '''
-                    if (new_isbn in isbn_list):
-                        if (user_error_redirect(f"\nERROR: ISBN {new_isbn} Already Exists in Database.")):
+                    """
+                    if new_isbn in isbn_list:
+                        if user_error_redirect(
+                            f"\nERROR: ISBN {new_isbn} Already Exists in Database."
+                        ):
                             update_book_interface()
                         else:
                             return 0
 
                     else:
-                        update_book(
-                            isbn, new_isbn, "isbn")
+                        update_book(isbn, new_isbn, "isbn")
 
-        elif (user_update_option == '2'):
-            print(
-                f"Current Author: {author}\n")
-            new_author = input(
-                "Please Input New Author:\n")
-            if (new_author == author):
+        elif user_update_option == "2":
+            print(f"Current Author: {author}\n")
+            new_author = input("Please Input New Author:\n")
+            if new_author == author:
                 print(
-                    f"\nThe New Inputted Author is the Same as the Old Author. No Changes Will Be Made.")
+                    f"\nThe New Inputted Author is the Same as the Old Author. No Changes Will Be Made."
+                )
             else:
-                update_book(
-                    author, new_author, "author")
+                update_book(author, new_author, "author")
 
-        elif (user_update_option == '3'):
-            print(
-                f"Current Title: {title}\n")
-            new_title = input(
-                "Please Input New Title:\n")
+        elif user_update_option == "3":
+            print(f"Current Title: {title}\n")
+            new_title = input("Please Input New Title:\n")
 
-            if (new_title == title):
+            if new_title == title:
                 print(
-                    f"\nThe New Inputted Title is the Same as the Old Title. No Changes Will Be Made.")
+                    f"\nThe New Inputted Title is the Same as the Old Title. No Changes Will Be Made."
+                )
 
             else:
-                update_book(
-                    title, new_title, "title")
+                update_book(title, new_title, "title")
 
-        elif (user_update_option == '4'):
-            print(
-                f"Current Publisher: {publisher}\n")
-            new_publisher = input(
-                "Please Input New Publisher:\n")
+        elif user_update_option == "4":
+            print(f"Current Publisher: {publisher}\n")
+            new_publisher = input("Please Input New Publisher:\n")
 
-            if (new_publisher == publisher):
+            if new_publisher == publisher:
                 print(
-                    f"\nThe New Inputted Publisher is the Same as the Old Publisher. No Changes Will Be Made.")
+                    f"\nThe New Inputted Publisher is the Same as the Old Publisher. No Changes Will Be Made."
+                )
 
             else:
-                update_book(
-                    publisher, new_publisher, "publisher")
+                update_book(publisher, new_publisher, "publisher")
 
-        elif (user_update_option == '5'):
-            print(
-                f"Current Genre: {genre}\n")
-            new_genre = input(
-                "Please Input New Genre:\n")
+        elif user_update_option == "5":
+            print(f"Current Genre: {genre}\n")
+            new_genre = input("Please Input New Genre:\n")
 
-            if (new_genre == genre):
+            if new_genre == genre:
                 print(
-                    f"\nThe New Inputted Genre is the Same as the Old Genre. No Changes Will Be Made.")
+                    f"\nThe New Inputted Genre is the Same as the Old Genre. No Changes Will Be Made."
+                )
 
             else:
-                update_book(
-                    genre, new_genre, "genre")
+                update_book(genre, new_genre, "genre")
 
-        elif (user_update_option == '6'):
-            print(
-                f"Current Year of Publication: {yop}\n")
-            new_yop = input(
-                "Please Input New Year of Publication:\n")
+        elif user_update_option == "6":
+            print(f"Current Year of Publication: {yop}\n")
+            new_yop = input("Please Input New Year of Publication:\n")
 
-            if (len(new_yop) != 4):
-                if (user_error_redirect(f"\nERROR: Year of Publication Should Contain EXACTLY 4 digits. Your Input Had {len(new_yop)} digits.")):
+            if len(new_yop) != 4:
+                if user_error_redirect(
+                    f"\nERROR: Year of Publication Should Contain EXACTLY 4 digits. Your Input Had {len(new_yop)} digits."
+                ):
                     update_book_interface()
                 else:
                     return 0
 
-            if (new_yop == yop):
+            if new_yop == yop:
                 print(
-                    f"\nThe New Inputted Year of Publication is the Same as the Old Year of Publication. No Changes Will Be Made.")
+                    f"\nThe New Inputted Year of Publication is the Same as the Old Year of Publication. No Changes Will Be Made."
+                )
             else:
-                update_book(
-                    yop, new_yop, "yop")
+                update_book(yop, new_yop, "yop")
 
-        elif (user_update_option == '7'):
-            print(
-                f"Current Date of Purchase: {dop}\n")
+        elif user_update_option == "7":
+            print(f"Current Date of Purchase: {dop}\n")
             new_dop = input(
-                "Please Input New Date of Purchase (DD/MM/YYYY):\n")
+                "Please Input New Date of Purchase (DD/MM/YYYY):\n"
+            )
 
-            if (len(new_dop) != 10):
-                if (user_error_redirect(f"\nERROR: Date of Purchase Should Contain EXACTLY 10 characters including '/'. Your Input Had {len(new_dop)} digits.")):
+            if len(new_dop) != 10:
+                if user_error_redirect(
+                    f"\nERROR: Date of Purchase Should Contain EXACTLY 10 characters including '/'. Your Input Had {len(new_dop)} digits."
+                ):
                     update_book_interface()
                 else:
                     return 0
 
             dop_day, dop_month, dop_year = new_dop.split("/")
 
-            if (int(dop_day) > 31 or int(dop_day) < 1):
-                if (user_error_redirect(f"\nERROR: Day of Purchase Should Be Between 1 and 31.")):
+            if int(dop_day) > 31 or int(dop_day) < 1:
+                if user_error_redirect(
+                    f"\nERROR: Day of Purchase Should Be Between 1 and 31."
+                ):
                     update_book_interface()
                 else:
                     return 0
 
-            if (int(dop_month) > 12 or int(dop_month) < 1):
-                if (user_error_redirect(f"\nERROR: Month of Purchase Should Be Between 1 and 12.")):
+            if int(dop_month) > 12 or int(dop_month) < 1:
+                if user_error_redirect(
+                    f"\nERROR: Month of Purchase Should Be Between 1 and 12."
+                ):
                     update_book_interface()
                 else:
                     return 0
 
-            if (int(dop_year) > 2023 or int(dop_year) < 0):
-                if (user_error_redirect(f"\nERROR: Year of Purchase Should Be Between 0 and 2023.")):
+            if int(dop_year) > 2023 or int(dop_year) < 0:
+                if user_error_redirect(
+                    f"\nERROR: Year of Purchase Should Be Between 0 and 2023."
+                ):
                     update_book_interface()
                 else:
                     return 0
 
-            if (new_dop == dop):
+            if new_dop == dop:
                 print(
-                    f"\nThe New Inputted Date of Purchase is the Same as the Old Date of Purchase. No Changes Will Be Made.")
+                    f"\nThe New Inputted Date of Purchase is the Same as the Old Date of Purchase. No Changes Will Be Made."
+                )
             else:
-                update_book(
-                    dop, new_dop, "dop")
+                update_book(dop, new_dop, "dop")
 
-        elif (user_update_option == '8'):
-            print(
-                f"Current Status: {status}\n")
+        elif user_update_option == "8":
+            print(f"Current Status: {status}\n")
             new_status = input(
-                "Please Input New Status:\n[1] - Wishlist\n[2] - To-Read\n[3] - Reading\n[4] - Completed\n\n")
+                "Please Input New Status:\n[1] - Wishlist\n[2] - To-Read\n[3] - Reading\n[4] - Completed\n\n"
+            )
 
-            if (new_status not in ["1", "2", "3", "4"]):
-                if (user_error_redirect("\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4].")):
+            if new_status not in ["1", "2", "3", "4"]:
+                if user_error_redirect(
+                    "\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4]."
+                ):
                     update_book_interface()
                 else:
                     return 0
 
-            if (new_status == '1'):
+            if new_status == "1":
                 new_status = "wishlist"
-            elif (new_status == '2'):
+            elif new_status == "2":
                 new_status = "to-read"
-            elif (new_status == '3'):
+            elif new_status == "3":
                 new_status = "reading"
             else:
                 new_status = "completed"
 
-            if (new_status == status):
+            if new_status == status:
                 print(
-                    f"\nThe New Inputted Status is the Same as the Old Status. No Changes Will Be Made.")
+                    f"\nThe New Inputted Status is the Same as the Old Status. No Changes Will Be Made."
+                )
 
             else:
-                update_book(
-                    status, new_status, "status")
+                update_book(status, new_status, "status")
 
-    print("\nYour Inputted Details are The Same as The Previous Details. Thus, No Changes Will Be Made.")
-    print("\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n")
+    print(
+        "\nYour Inputted Details are The Same as The Previous Details. Thus, No Changes Will Be Made."
+    )
+    print(
+        "\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n"
+    )
     user_input_option = input("[1] - Yes\n[2] - No\n\n")
 
-    while (user_input_option not in ["1", "2"]):
+    while user_input_option not in ["1", "2"]:
         # error handling: asks user for input again if input is invalid
-        print("\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n")
+        print(
+            "\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n"
+        )
         user_input_option = input(
-            "[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n")
+            "[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n"
+        )
 
-    if (user_input_option == "1"):
+    if user_input_option == "1":
         update_book_interface()
     else:
         return 0

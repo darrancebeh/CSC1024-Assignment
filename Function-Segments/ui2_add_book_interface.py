@@ -5,12 +5,13 @@ from f1_display_books import display_books
 
 
 def clear():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 def add_book_interface():
     clear()
-    print(r"""
+    print(
+        r"""
 ██████╗░░█████╗░░█████╗░██╗░░██╗  ░█████╗░██████╗░██████╗░██╗████████╗██╗░█████╗░███╗░░██╗
 ██╔══██╗██╔══██╗██╔══██╗██║░██╔╝  ██╔══██╗██╔══██╗██╔══██╗██║╚══██╔══╝██║██╔══██╗████╗░██║
 ██████╦╝██║░░██║██║░░██║█████═╝░  ███████║██║░░██║██║░░██║██║░░░██║░░░██║██║░░██║██╔██╗██║
@@ -24,7 +25,8 @@ def add_book_interface():
 ██║██║╚████║░░░██║░░░██╔══╝░░██╔══██╗██╔══╝░░██╔══██║██║░░██╗██╔══╝░░
 ██║██║░╚███║░░░██║░░░███████╗██║░░██║██║░░░░░██║░░██║╚█████╔╝███████╗
 ╚═╝╚═╝░░╚══╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚══════╝
-""")
+"""
+    )
 
     print("\nWelcome to the Book Addition Interface!\n")
     display_books()
@@ -41,7 +43,9 @@ def add_book_interface():
         print(f"An error occurred while adding the book: {str(e)}")
         return
 
-    print("\nCongratulations! Your Input is Valid and A Book Has Been Added!\n")
+    print(
+        "\nCongratulations! Your Input is Valid and A Book Has Been Added!\n"
+    )
 
     print(f"\nBook Added: {title} by {author}")
     print("\nBook Details:\n")
@@ -57,12 +61,13 @@ def add_book_interface():
     print("\nWould You Like to Add Another Book?\n")
     user_input_option = input("[1] - Yes\n[2] - No\n\n")
 
-    while (user_input_option not in ["1", "2"]):
+    while user_input_option not in ["1", "2"]:
         print("\nWould You Like to Add Another Book?\n")
         user_input_option = input(
-            "[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n")
+            "[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n"
+        )
 
-    if (user_input_option == "1"):
+    if user_input_option == "1":
         add_book_interface()
     else:
         return 0
