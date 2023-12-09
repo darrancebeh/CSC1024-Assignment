@@ -179,21 +179,6 @@ def display_sorted_books(single_sorted_list):
         print("\n")
 
 
-def input_check(inp, accepted_range):
-    """
-    Checks if inp is in accepted_range.
-    If yes, returns ok = 1.
-    If not, returns ok = 0.
-    """
-    if inp in accepted_range:
-        ok = 1
-
-    else:
-        ok = 0
-
-    return ok
-
-
 def sort_books():
     """
     Loop to repeatedly ask user if they want to sort the display of books.
@@ -235,13 +220,13 @@ Status [7]
             print("Error, please try again.")
 
         else:
+
             """
             Checks if input is an element in the list [1, 2, 3, 4, 5, 6, 7].
             If not, prints "Error: not an available option."
             """
-            ok = input_check(category_input, [1, 2, 3, 4, 5, 6, 7])
 
-            if ok == 0:
+            if category_input not in [1, 2, 3, 4, 5, 6, 7]:
                 print("Error: not an available option.")
 
             else:
@@ -285,21 +270,21 @@ Descending order (Z→A/9→0) [2]
                     print("Error, please try again.")
 
                 else:
+
                     """
                     Checks if input is an element in the list [1, 2].
                     If not, prints "Error: not an available option."
                     """
-                    ok = input_check(order_input, [1, 2])
 
-                    if ok == 0:
+                    if order_input not in [1, 2]:
                         print("Error: not an available option.")
 
                     else:
                         """
                         'order' is set to 'order_input' minus 1 in order to match with 0 and 1.
                         This is done to decide if the list should be sorted in the ascending or descending order in the sort_book_superlist(category, order) function.
-                        0 = ascending order, because reverse=0.
-                        1 = descending order, because reverse=1.
+                        1-1 = 0  = ascending order, because reverse=0.
+                        2-1 = 1  = descending order, because reverse=1.
                         """
                         order = order_input - 1
 
@@ -313,3 +298,6 @@ Descending order (Z→A/9→0) [2]
                             sorted_superlist
                         )
                         display_sorted_books(single_sorted_list)
+
+
+sort_books()
