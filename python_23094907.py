@@ -566,7 +566,7 @@ def sort_books():
     If anything else is entered, continues on with sorting options.
     """
     while input(
-        "-----------------------------------------------------------------\nSort the display? (Enter N to decline or anything else to accept) \n"
+        "---------------------------------------------------------------------------------------------------\nSort the display? (Enter N to decline and return to main menu, or anything else to accept) \n"
     ).upper() != "N":
 
         """
@@ -672,6 +672,10 @@ Descending order (Z→A/9→0) [2]
                             sorted_superlist
                         )
                         display_sorted_books(single_sorted_list)
+    
+    print("Returning to Main Menu...")
+    input("Press Any Key to Continue.")
+    return 0
 
 
 def check_isbn_duplicate(isbn):
@@ -994,6 +998,11 @@ Main Program Functional Requirements END
 '''
 Function User Interface Functions START
 '''
+
+
+def display_book_interface():
+    display_books()
+    sort_books()
 
 # user interface for add book function
 def add_book_interface():
@@ -1705,7 +1714,7 @@ def main_user_interface():
             "Input Option Here: ")
 
     option_to_function_identifier = {
-        "1": display_books,
+        "1": display_book_interface,
         "2": search_books,
         "3": add_book_interface,
         "4": update_book_interface,
