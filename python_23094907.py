@@ -338,8 +338,6 @@ def isbn_to_details(isbn):
             return book
         
 
-
-
 '''
 Auxilary Functions END
 '''
@@ -890,7 +888,7 @@ def add_book(book_details):
 
 
 #Functional Requirement 4 - Update Book Record(s)
-def update_book(old_detail, new_detail, detail_type):
+def update_book(isbn, old_detail, new_detail, detail_type):
     """
     Opens book database in write mode and replaces old details with new details.
     We use ISBN to identify which item to update.
@@ -922,9 +920,11 @@ def update_book(old_detail, new_detail, detail_type):
         """
 
         book_details = book.split("|")
-        if book_details[detail_to_index_identifier[detail_type]] == old_detail:
-            book_details[detail_to_index_identifier[detail_type]] = new_detail
-            book_list[book_list.index(book)] = "|".join(book_details)
+        if book_details[0] == isbn:
+            if book_details[detail_to_index_identifier[detail_type]] == old_detail:
+                book_details[detail_to_index_identifier[detail_type]
+                             ] = new_detail
+                book_list[book_list.index(book)] = "|".join(book_details)
 
     """
     Opens book database in write mode and writes the updated book list, replacing the old book list.
@@ -1478,7 +1478,7 @@ def update_book_interface():
 
         # updates book if user confirms, otherwise returns to main menu
         if user_option == "1":
-            update_book(old_detail, new_detail, detail_type)
+            update_book(isbn, old_detail, new_detail, detail_type)
         elif user_option == "2":
             print("Okay. The Book will not be Updated.")
             input("Press Any Key to Return to Main Menu.")
@@ -1546,6 +1546,7 @@ def delete_book_interface():
         # deletes book if user confirms, otherwise returns to main menu
         if (user_option == "Y" or user_option == "1"):
             delete_book(user_input)
+            return 0
         elif (user_option == "N" or user_option == "2"):
             print("Okay. The Book will not be Deleted.")
             input("Press Any Key to Return to Main Menu.")
@@ -1635,6 +1636,7 @@ def display_team_background():
     )
 
     input("\n\nInput any Key to Return to Main Menu.\n")
+    return 0
 
 
 # main menu user interface
@@ -1682,7 +1684,7 @@ def main_user_interface():
 
     print("\nWhat Would You Like to Do?\n")
 
-    print("[1] - View All Books in Database\n[2] - Add a Book to Database\n[3] - Update a Book in Database\n[4] - Delete a Book from Database\n[5] - Background of Our Project\n\n[x] - Exit the Program\n\n")
+    print("[1] - Display All Book Records in Database\n[2] - Search for a Book in Database\n[3] - Add Book Record(s) into Database\n[4] - Update Book Record(s) in Database\n[5] - Delete Book Record(s) from Database\n[6] - Show Team Background\n\n[x] - Exit the Program\n\n")
 
     user_input_function_option = input("Input Option Here: ")
 
@@ -1726,8 +1728,10 @@ Runs at program start
 
 def main():
     initial_time_program_start = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    main_user_interface()
-
+    
+    while True:
+        if(main_user_interface() == 0):
+            break
     '''
     If function returns false, it means the user changed their mind and doesn't want to exit.
     Thus, function redirects user back to main menu.

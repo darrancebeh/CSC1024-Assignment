@@ -398,7 +398,7 @@ def update_book_interface():
 
         # updates book if user confirms, otherwise returns to main menu
         if user_option == "1":
-            update_book(old_detail, new_detail, detail_type)
+            update_book(isbn, old_detail, new_detail, detail_type)
         elif user_option == "2":
             print("Okay. The Book will not be Updated.")
             input("Press Any Key to Return to Main Menu.")

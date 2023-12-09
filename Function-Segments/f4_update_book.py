@@ -1,7 +1,7 @@
 from aux1_get_books import get_books
 
 
-def update_book(old_detail, new_detail, detail_type):
+def update_book(isbn, old_detail, new_detail, detail_type):
     """
     Opens book database in write mode and replaces old details with new details.
     We use ISBN to identify which item to update.
@@ -33,9 +33,11 @@ def update_book(old_detail, new_detail, detail_type):
         """
 
         book_details = book.split("|")
-        if book_details[detail_to_index_identifier[detail_type]] == old_detail:
-            book_details[detail_to_index_identifier[detail_type]] = new_detail
-            book_list[book_list.index(book)] = "|".join(book_details)
+        if book_details[0] == isbn:
+            if book_details[detail_to_index_identifier[detail_type]] == old_detail:
+                book_details[detail_to_index_identifier[detail_type]
+                             ] = new_detail
+                book_list[book_list.index(book)] = "|".join(book_details)
 
     """
     Opens book database in write mode and writes the updated book list, replacing the old book list.
