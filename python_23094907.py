@@ -878,7 +878,7 @@ def search_books():
     print(f"Date of Purchase    : {book_details[6]}")
     print(f"Status: {book_details[7]}")
 
-    print("\nBook Details Have Been Displayed.")
+    print("\nBook Details Have Been Displayed.\n")
     print("Returning to Main Menu.")
     input("Press Any Key To Continue.")
     return 0
