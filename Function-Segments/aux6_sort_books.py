@@ -185,7 +185,7 @@ def input_check(inp, accepted_range):
     return ok
 
 
-def ask_sort_books():
+def sort_books():
     '''
     Loop to repeatedly ask user if they want to sort the display of books.
 

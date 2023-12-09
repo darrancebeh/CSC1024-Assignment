@@ -1,14 +1,23 @@
+import os
+
 from aux1_get_books import get_books
 
-'''
-When using this function in Function Segments, both display_books and get_max_column_length have to be imported from this file.
-'''
+
+def clear():
+    '''
+    Clears the Screen for better visibility.
+    '''
+
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def display_books():
     '''
-    Displays header.
+    Calls the clear function to clear the screen for better visiblity.
+    Displays header for the function. (All Books)
     '''
+
+    clear()
 
     print(r'''
 ░█████╗░██╗░░░░░██╗░░░░░  ██████╗░░█████╗░░█████╗░██╗░░██╗░██████╗
@@ -115,3 +124,6 @@ def get_max_column_length(category):
 
     max_column_length = max(column_lengths)
     return max_column_length
+
+
+display_books()
