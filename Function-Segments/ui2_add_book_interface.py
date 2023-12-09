@@ -10,13 +10,18 @@ from f1_display_books import display_books
 '''
 - Clears the screen for better visibility.
 '''
+
+
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
+
 
 '''
 - Calls the clear function to clear the screen for better visibility. 
 - Displays header for the function (adding books).
 '''
+
+
 def add_book_interface():
     clear()
     print(
@@ -39,13 +44,14 @@ def add_book_interface():
 
     print("\nWelcome to the Book Addition Interface!\n")
 
-'''
-- Display all books using display_books().
-- Prompts the user to input details for a new book by calling the add_book_information() function.
-- Attempts to add the new book to the collection using the add_book() function. If an error occurs during this process, it prints an error message and returns.
-- If the book is added successfully, it prints a success message and the details of the new book.
-- Ask the user if they want to add another book. If they do, it calls itself recursively to repeat the process. If not, it returns 0 to end the function.
-'''
+    '''
+    - Display all books using display_books().
+    - Prompts the user to input details for a new book by calling the add_book_information() function.
+    - Attempts to add the new book to the collection using the add_book() function. If an error occurs during this process, it prints an error message and returns.
+    - If the book is added successfully, it prints a success message and the details of the new book.
+    - Ask the user if they want to add another book. If they do, it calls itself recursively to repeat the process. If not, it returns 0 to end the function.
+    '''
+
     display_books()
 
     print("_____________________________________")
@@ -58,7 +64,6 @@ def add_book_interface():
         add_book(book)
     except Exception as e:
         print(f"An error occurred while adding the book: {str(e)}")
-        return
 
     print(
         "\nCongratulations! Your Input is Valid and A Book Has Been Added!\n"
@@ -86,10 +91,10 @@ def add_book_interface():
 
     if user_input_option == "1":
         add_book_interface()
-    else:
-        return 0
 
-'''
-- Calls the add_book_interface() function to start the process.
-'''
+    '''
+    - Calls the add_book_interface() function to start the process.
+    '''
+
+
 add_book_interface()
