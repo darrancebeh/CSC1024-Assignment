@@ -961,6 +961,9 @@ def delete_book(isbn):
             f.write("\n")
 
     print("Book Deleted Successfully!")
+    print("\nReturning to Main Menu...")
+    input("Press Any Key To Continue.")
+    return 0
 
 
 #Functional Requirement 6 - Exit Program
