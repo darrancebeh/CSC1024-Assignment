@@ -50,10 +50,12 @@ def sort_book_superlist(category, order):
     book_superlist = turn_books_into_sublists()
 
     '''
-    Sorts the superlist of books according to arguments 'category' and 'order'.
+    Sorts the superlist of books according to 'category' which determines which detail to sort by (using index of detail in book sublist),
+    and order, which determines if it will be sorted in ascending or descending order.
+    Also takes the lowercase of the chosen detail so that it is sorted properly regardless of letter case.
     '''
     sorted_superlist = sorted(book_superlist,
-                              key=lambda x: x[category], reverse=order)
+                              key=lambda book: book[category].lower(), reverse=order)
     '''
     Returns the sorted list.
     '''
