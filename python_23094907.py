@@ -1,5 +1,5 @@
 import os
-import datetime
+from datetime import datetime
 # import os for terminal screen clearing
 # import datetime for date and time functions for user experience improvement
 
