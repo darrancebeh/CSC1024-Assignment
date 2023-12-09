@@ -138,7 +138,7 @@ def display_sorted_books(single_sorted_list):
 
     for category in categories:
         column_length = get_max_column_length(categories.index(category)) + 2
-        # +3 to leave a little space before the next column and prevent them from being too close together.
+        # +2 to leave a little space before the next column and prevent them from being too close together.
 
         if column_length < len(category):
             column_length = len(category) + 2
@@ -169,7 +169,7 @@ def display_sorted_books(single_sorted_list):
             column_length = (
                 get_max_column_length(book_details.index(detail)) + 2
             )
-            # +3 to leave a little space before the next column and prevent them from being too close together.
+            # +2 to leave a little space before the next column and prevent them from being too close together.
 
             if column_length < len(categories[book_details.index(detail)]):
                 column_length = len(categories[book_details.index(detail)]) + 2
@@ -186,14 +186,9 @@ def sort_books():
     If 'n' or 'N' is entered, breaks the loop.
     If anything else is entered, continues on with sorting options.
     """
-    while True:
-        if (
-            input(
-                "-----------------------------------------------------------------\nSort the display? (Enter N to decline or anything else to accept) \n"
-            ).upper()
-            == "N"
-        ):
-            break
+    while input(
+        "-----------------------------------------------------------------\nSort the display? (Enter N to decline or anything else to accept) \n"
+    ).upper() != "N":
 
         """
         Checks if input is an integer.
