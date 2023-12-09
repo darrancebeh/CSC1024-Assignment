@@ -12,13 +12,6 @@ def clear():
 
 
 def display_books():
-    """
-    Calls the clear function to clear the screen for better visiblity.
-    Displays header for the function. (All Books)
-    """
-
-    clear()
-
     print(
         r"""
 ░█████╗░██╗░░░░░██╗░░░░░  ██████╗░░█████╗░░█████╗░██╗░░██╗░██████╗
