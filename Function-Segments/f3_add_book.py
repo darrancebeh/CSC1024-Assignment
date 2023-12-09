@@ -105,7 +105,8 @@ def add_book_information():
 def add_book(book):
     with open("books_23094907.txt", 'a') as f:
         isbn, author, title, publisher, genre, published_year, date_purchased_str, status = book
-        book_information = f"{isbn}|{author}|{title}|{publisher}|{genre}|{published_year}|{date_purchased_str}|{status}"
+        book_information = f"{isbn}|{author}|{title}|{publisher}|{
+            genre}|{published_year}|{date_purchased_str}|{status}"
         f.write('\n' + book_information)
     print("Book added successfully!")
 
@@ -114,5 +115,3 @@ def add_book(book):
 - Calls the 'add_book_information()' function to collect book information from the user.
 - Collected information is then passed to the 'add_book()' function to add the book to the 'books_23094907.txt' file.
 '''
-book = add_book_information()
-add_book(book)

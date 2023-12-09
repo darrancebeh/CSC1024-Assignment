@@ -1,16 +1,14 @@
 import os
+from f3_add_book import add_book_information
+from f3_add_book import add_book
+from f1_display_books import display_books
 
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def display_books():
-    pass
-
-
 def add_book_interface():
-    from add_book import add_book, add_book_information
     clear()
     print(r"""
 ██████╗░░█████╗░░█████╗░██╗░░██╗  ░█████╗░██████╗░██████╗░██╗████████╗██╗░█████╗░███╗░░██╗
@@ -28,12 +26,8 @@ def add_book_interface():
 ╚═╝╚═╝░░╚══╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚══════╝
 """)
 
-    print("\nWelcome to the book addition interface!\n")
-    try:
-        display_books()
-    except Exception as e:
-        print(f"An error occurred while displaying the books: {str(e)}")
-        return
+    print("\nWelcome to the Book Addition Interface!\n")
+    display_books()
 
     print("_____________________________________")
     print(f"\nAll books have been displayed.\n")
@@ -42,10 +36,11 @@ def add_book_interface():
     try:
         book = add_book_information()
         isbn, author, title, publisher, genre, yop, dop, status = book
-        add_book(book)
     except Exception as e:
         print(f"An error occurred while adding the book: {str(e)}")
         return
+
+    add_book(book)
 
     print("\nCongratulations! Your Input is Valid and A Book Has Been Added!\n")
 
