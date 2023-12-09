@@ -42,8 +42,7 @@ def input_to_isbn():
             Redirects user to retry input or return to main menu.
             '''
 
-            if (user_error_redirect(f"\nERROR: ISBN Should Contain EXACTLY 13 digits. Your Input Had {
-                    len(user_input_id)} digits.")):
+            if (user_error_redirect(f"\nERROR: ISBN Should Contain EXACTLY 13 digits. Your Input Had {len(user_input_id)} digits.")):
                 return 1
             else:
                 return 0
@@ -105,8 +104,8 @@ def input_to_isbn():
                 '''
 
                 if (author_book_list):
-                    print(f"\nMultiple Books Found for Author {
-                          user_input_id}.")
+                    print(
+                        f"\nMultiple Books Found for Author {user_input_id}.")
                     print("Please Select the Book to Update:\n")
                     book_count = 0
 
@@ -118,8 +117,8 @@ def input_to_isbn():
                         book_count += 1
                         isbn, author, title, publisher, genre, yop, dop, status = book
 
-                        print(f"[{book_count}] | {isbn} | {
-                              title} | {genre} | {status}")
+                        print(
+                            f"[{book_count}] | {isbn} | {title} | {genre} | {status}")
 
                     '''
                     Prompts user to input book number to update.
