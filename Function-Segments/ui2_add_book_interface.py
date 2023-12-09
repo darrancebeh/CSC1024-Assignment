@@ -144,9 +144,40 @@ def add_book_interface():
     try:
         book = add_book_information()
         isbn, author, title, publisher, genre, yop, dop, status = book
-        add_book(book)
     except Exception as e:
         print(f"An error occurred while adding the book: {str(e)}")
+
+    '''
+    Prints details of the book to add and double confirms with user whether they want to add the book.
+    '''
+
+    print("\n_____________________________________")
+    print("\nPlease confirm the following details:\n")
+    print(f"ISBN: {isbn}")
+    print(f"Author: {author}")
+    print(f"Title: {title}")
+    print(f"Publisher: {publisher}")
+    print(f"Genre: {genre}")
+    print(f"Year of Publication: {yop}")
+    print(f"Date of Purchase: {dop}")
+    print(f"Status: {status}")
+
+    print("\n_____________________________________")
+
+    user_input_confirm = input(
+        "\nAre you sure you want to add this book with the following details?\n[1] - Yes\n[2] - No\n\n")
+
+    while user_input_confirm not in ["1", "2"]:
+        print("\nAre you sure you want to add this book with the following details?\n")
+        user_input_confirm = input(
+            "\nAre you sure you want to add this book with the following details?\n[1] - Yes\n[2] - No\n\n")
+
+    if (user_input_confirm == "1"):
+        add_book(book)
+    else:
+        print("Okay. The Book will not be Added.")
+        input("Press Any Key to Return to Main Menu.")
+        return 0
 
     print(
         "\nCongratulations! Your Input is Valid and A Book Has Been Added!\n"
