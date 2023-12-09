@@ -382,17 +382,6 @@ def update_book_interface():
         print(f"Old {detail_type.capitalize()}: {old_detail}")
         print(f"New {detail_type.capitalize()}: {new_detail}")
 
-        detail_to_index_identifier = {
-        "isbn": 0,
-        "author": 1,
-        "title": 2,
-        "publisher": 3,
-        "genre": 4,
-        "yop": 5,
-        "dop": 6,
-        "status": 7,
-    }
-
         # double confirms with user to confirm whether they want to update the selected book
         user_option = input(
             "\nAre you sure you want to update this book?\n[1] - Yes\n[2] - No\n"
