@@ -5,7 +5,7 @@
 from datetime import datetime
 
 '''
-- The 'def check_isbn_duplicate(isbn)' is responsible for checking existing ISBNs. 
+- The 'def check_isbn_duplicate(isbn)' checks existing ISBNs. 
 - It checks books_23094907.txt in read mode for similarities. 
 '''
 
@@ -20,7 +20,7 @@ def check_isbn_duplicate(isbn):
 
 '''
 - The 'add_book_information()' function collects and validates information about a book from the user.
-- It prompts the user to enter the ISBN, author's name, book's title, publisher's name, genre, publishing year, purchase date, and book's status.
+- It prompts the user to enter the ISBN, author's name, book's title, publisher's name, genre, publishing year, purchase date, and book status.
 - The naming convention is taken into consideration as people from different cultures have different naming conventions, such as umlauts and ligatures.
 - Also performs validation checks for the ISBN to detect existing matching books.
 '''
@@ -38,14 +38,14 @@ def add_book_information():
                 break
         else:
             print(
-                "Error. ISBN number must be 13 digits long and contain only digits. Please try again.")
+                "Error. ISBN must be 13 digits long and contain only digits. Please try again.")
     while True:
         author = input("Author's name: ")
         if all(word.isalpha() for word in author.split()):
             break
         else:
             print(
-                "Error. Author's name must only contain alphabetical characters. Please try again.")
+                "Error. The author's name must only contain alphabetical characters. Please try again.")
     title = input("Book's title: ")
     publisher = input("Publisher's name: ")
     while True:
@@ -54,7 +54,7 @@ def add_book_information():
             break
         else:
             print(
-                "Error. Genre must only contain alphabetical characters. Please try again.")
+                "Error. The genre must only contain alphabetical characters. Please try again.")
     while True:
         published_year = input("Publishing year: ")
         if len(published_year) == 4 and published_year.isdigit() and int(published_year) > 0 and int(published_year) <= datetime.now().year:
@@ -74,19 +74,19 @@ def add_book_information():
                 break
             else:
                 print(
-                    "Error. The purchase date cannot be in the future and must be after the publishing year. Please try again.")
+                    "Error. The purchase date must be after the publishing year. Please try again.")
         except ValueError:
             print("Error. The date format is incorrect. Please try again.")
     while True:
         print("Please input the book's status:")
-        print("[1] - Wishlist")
-        print("[2] - To-read")
-        print("[3] - Reading")
-        print("[4] - Completed")
+        print("[1] - wishlist")
+        print("[2] - to-read")
+        print("[3] - reading")
+        print("[4] - completed")
         print()
         status_input = input("Book's status (enter a number from 1 to 4): ")
-        status_options = {'1': 'Wishlist', '2': 'To-read',
-                          '3': 'Reading', '4': 'Completed'}
+        status_options = {'1': 'wishlist', '2': 'to-read',
+                          '3': 'reading', '4': 'completed'}
         if status_input in status_options:
             status = status_options[status_input]
             break
