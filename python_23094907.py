@@ -1099,6 +1099,11 @@ def add_book_interface():
     if user_input_option == "1":
         add_book_interface()
 
+    elif user_input_option == "2":
+        print("\nReturning to Main Menu...")
+        input("Press Any Key to Continue.")
+        return 0
+
 
 # user interface for update book function
 def update_book_interface():
