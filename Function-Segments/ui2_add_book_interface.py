@@ -1,63 +1,77 @@
-from datetime import datetime
+import os
 
 
-def get_book_information():
-    print("Please enter the following information:")
-    while True:
-        isbn = input("ISBN number: ")
-        if len(isbn) == 13:
-            if book_exists(isbn):
-                print("Unsuccessful. Book already exists.")
-                return None
-            break
-        else:
-            print("Error. ISBN number must be 13 digits long. Please try again.")
-    author = input("Author's name: ")
-    title = input("Book's title: ")
-    publisher = input("Publisher's name: ")
-    genre = input("Genre of the book: ")
-    while True:
-        published_year = input("Publishing year: ")
-        if published_year.isdigit() and int(published_year) > 0 and int(published_year) <= datetime.now().year:
-            break
-        else:
-            print(
-                "Error. Publishing year must be a positive integer and not in the future. Please try again.")
-    while True:
-        date_purchased_str = input("Date purchased in the format DD-MM-YYYY: ")
-        try:
-            date_purchased = datetime.strptime(date_purchased_str, '%d-%m-%Y')
-            if date_purchased <= datetime.now():
-                break
-            else:
-                print(
-                    "Error. The purchase date cannot be in the future. Please try again.")
-        except ValueError:
-            print("Error. The date format is incorrect. Please try again.")
-    status = input("Book's status: ")
-
-    return isbn, author, title, publisher, genre, published_year, date_purchased_str, status
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def book_exists(isbn):
-    with open("books_23094907.txt", 'r') as f:
-        for line in f:
-            if line.split('|')[0] == isbn:
-                return True
-    return False
+def display_books():
+    pass
 
 
-def add_book(book):
-    if book is not None:
-        with open("books_23094907.txt", 'a') as f:
-            isbn, author, title, publisher, genre, published_year, date_purchased_str, status = book
-            book_information = f"{isbn}|{author}|{title}|{publisher}|{
-                genre}|{published_year}|{date_purchased_str}|{status}"
-            f.write(book_information + '\n')
-        print("Book added successfully!")
+def add_book_interface():
+    from add_book import add_book, add_book_information
+    clear()
+    print(r"""
+██████╗░░█████╗░░█████╗░██╗░░██╗  ░█████╗░██████╗░██████╗░██╗████████╗██╗░█████╗░███╗░░██╗
+██╔══██╗██╔══██╗██╔══██╗██║░██╔╝  ██╔══██╗██╔══██╗██╔══██╗██║╚══██╔══╝██║██╔══██╗████╗░██║
+██████╦╝██║░░██║██║░░██║█████═╝░  ███████║██║░░██║██║░░██║██║░░░██║░░░██║██║░░██║██╔██╗██║
+██╔══██╗██║░░██║██║░░██║██╔═██╗░  ██╔══██║██║░░██║██║░░██║██║░░░██║░░░██║██║░░██║██║╚████║
+██████╦╝╚█████╔╝╚█████╔╝██║░╚██╗  ██║░░██║██████╔╝██████╔╝██║░░░██║░░░██║╚█████╔╝██║░╚███║
+╚═════╝░░╚════╝░░╚════╝░╚═╝░░╚═╝  ╚═╝░░╚═╝╚═════╝░╚═════╝░╚═╝░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝
+
+██╗███╗░░██╗████████╗███████╗██████╗░███████╗░█████╗░░█████╗░███████╗
+██║████╗░██║╚══██╔══╝██╔════╝██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝
+██║██╔██╗██║░░░██║░░░█████╗░░██████╔╝█████╗░░███████║██║░░╚═╝█████╗░░
+██║██║╚████║░░░██║░░░██╔══╝░░██╔══██╗██╔══╝░░██╔══██║██║░░██╗██╔══╝░░
+██║██║░╚███║░░░██║░░░███████╗██║░░██║██║░░░░░██║░░██║╚█████╔╝███████╗
+╚═╝╚═╝░░╚══╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░╚═╝░╚════╝░╚══════╝
+""")
+
+    print("\nWelcome to the book addition interface!\n")
+    try:
+        display_books()
+    except Exception as e:
+        print(f"An error occurred while displaying the books: {str(e)}")
+        return
+
+    print("_____________________________________")
+    print(f"\nAll books have been displayed.\n")
+    print("To add a book, please input the book's details.\n")
+
+    try:
+        book = add_book_information()
+        isbn, author, title, publisher, genre, yop, dop, status = book
+        add_book(book)
+    except Exception as e:
+        print(f"An error occurred while adding the book: {str(e)}")
+        return
+
+    print("\nCongratulations! Your Input is Valid and A Book Has Been Added!\n")
+
+    print(f"\nBook Added: {title} by {author}")
+    print("\nBook Details:\n")
+    print(f"ISBN: {isbn}")
+    print(f"Author: {author}")
+    print(f"Title: {title}")
+    print(f"Publisher: {publisher}")
+    print(f"Genre: {genre}")
+    print(f"Year of Publication: {yop}")
+    print(f"Date of Purchase: {dop}")
+    print(f"Status: {status}")
+
+    print("\nWould You Like to Add Another Book?\n")
+    user_input_option = input("[1] - Yes\n[2] - No\n\n")
+
+    while (user_input_option not in ["1", "2"]):
+        print("\nWould You Like to Add Another Book?\n")
+        user_input_option = input(
+            "[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n")
+
+    if (user_input_option == "1"):
+        add_book_interface()
+    else:
+        return 0
 
 
-# Example usage:
-book = get_book_information()
-if book is not None:
-    add_book(book)
+add_book_interface()
