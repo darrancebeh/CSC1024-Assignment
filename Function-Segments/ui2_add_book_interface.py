@@ -36,11 +36,10 @@ def add_book_interface():
     try:
         book = add_book_information()
         isbn, author, title, publisher, genre, yop, dop, status = book
+        add_book(book)
     except Exception as e:
         print(f"An error occurred while adding the book: {str(e)}")
         return
-
-    add_book(book)
 
     print("\nCongratulations! Your Input is Valid and A Book Has Been Added!\n")
 
