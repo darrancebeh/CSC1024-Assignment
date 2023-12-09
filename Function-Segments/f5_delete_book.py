@@ -32,7 +32,14 @@ def delete_book_interface():
 
     display_books()
 
-    delete_book(input_to_isbn())
+    user_input = input_to_isbn()
+
+    if (user_input == 1):
+        delete_book_interface()
+    elif (user_input == 0):
+        return
+    else:
+        delete_book(user_input)
 
 
 def delete_book(isbn):
