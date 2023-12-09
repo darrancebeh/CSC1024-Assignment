@@ -128,6 +128,12 @@ def update_book_interface():
 
     print("\n\nWhat Details Would You Like to Update?\n")
 
+
+    # initialize variables to store old and new details
+    old_detail = ""
+    new_detail = ""
+    detail_type = ""
+
     user_update_option = input(
         "[1] - ISBN\n[2] - Author\n[3] - Title\n[4] - Publisher\n[5] - Genre\n[6] - Year of Publication\n[7] - Date of Purchase\n[8] - Book Status\n\n"
     )
@@ -184,7 +190,9 @@ def update_book_interface():
                             return 0
 
                     else:
-                        update_book(isbn, new_isbn, "isbn")
+                        old_detail = isbn
+                        new_detail = new_isbn
+                        detail_type = "isbn"
 
         elif user_update_option == "2":
             print(f"Current Author: {author}\n")
@@ -194,7 +202,9 @@ def update_book_interface():
                     f"\nThe New Inputted Author is the Same as the Old Author. No Changes Will Be Made."
                 )
             else:
-                update_book(author, new_author, "author")
+                old_detail = author
+                new_detail = new_author
+                detail_type = "author"
 
         elif user_update_option == "3":
             print(f"Current Title: {title}\n")
@@ -206,7 +216,9 @@ def update_book_interface():
                 )
 
             else:
-                update_book(title, new_title, "title")
+                old_detail = title
+                new_detail = new_title
+                detail_type = "title"
 
         elif user_update_option == "4":
             print(f"Current Publisher: {publisher}\n")
@@ -218,7 +230,9 @@ def update_book_interface():
                 )
 
             else:
-                update_book(publisher, new_publisher, "publisher")
+                old_detail = publisher
+                new_detail = new_publisher
+                detail_type = "publisher"
 
         elif user_update_option == "5":
             print(f"Current Genre: {genre}\n")
@@ -230,7 +244,9 @@ def update_book_interface():
                 )
 
             else:
-                update_book(genre, new_genre, "genre")
+                old_detail = genre
+                new_detail = new_genre
+                detail_type = "genre"
 
         elif user_update_option == "6":
             print(f"Current Year of Publication: {yop}\n")
@@ -249,7 +265,9 @@ def update_book_interface():
                     f"\nThe New Inputted Year of Publication is the Same as the Old Year of Publication. No Changes Will Be Made."
                 )
             else:
-                update_book(yop, new_yop, "yop")
+                old_detail = yop
+                new_detail = new_yop
+                detail_type = "yop"
 
         elif user_update_option == "7":
             print(f"Current Date of Purchase: {dop}\n")
@@ -296,7 +314,9 @@ def update_book_interface():
                     f"\nThe New Inputted Date of Purchase is the Same as the Old Date of Purchase. No Changes Will Be Made."
                 )
             else:
-                update_book(dop, new_dop, "dop")
+                old_detail = dop
+                new_detail = new_dop
+                detail_type = "dop"
 
         elif user_update_option == "8":
             print(f"Current Status: {status}\n")
@@ -327,29 +347,73 @@ def update_book_interface():
                 )
 
             else:
-                update_book(status, new_status, "status")
+                old_detail = status
+                new_detail = new_status
+                detail_type = "status"
 
-    print(
-        "\nYour Inputted Details are The Same as The Previous Details. Thus, No Changes Will Be Made."
-    )
-    print(
-        "\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n"
-    )
-    user_input_option = input("[1] - Yes\n[2] - No\n\n")
-
-    while user_input_option not in ["1", "2"]:
-        # error handling: asks user for input again if input is invalid
+    
+    if(detail_type == ""):
+        print(
+            "\nYour Inputted Details are The Same as The Previous Details. Thus, No Changes Will Be Made."
+        )
         print(
             "\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n"
         )
-        user_input_option = input(
-            "[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n"
+        user_input_option = input("[1] - Yes\n[2] - No\n\n")
+
+        while user_input_option not in ["1", "2"]:
+            # error handling: asks user for input again if input is invalid
+            print(
+                "\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n"
+            )
+            user_input_option = input(
+                "[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n"
+            )
+
+        if user_input_option == "1":
+            update_book_interface()
+        else:
+            return 0
+        
+    else:
+        #display book details again
+        print("\n______________________________________________________________________________\n")
+        print("Update Summary:\n")
+        print(f"Old {detail_type.capitalize()}: {old_detail}")
+        print(f"New {detail_type.capitalize()}: {new_detail}")
+
+        detail_to_index_identifier = {
+        "isbn": 0,
+        "author": 1,
+        "title": 2,
+        "publisher": 3,
+        "genre": 4,
+        "yop": 5,
+        "dop": 6,
+        "status": 7,
+    }
+
+        # double confirms with user to confirm whether they want to update the selected book
+        user_option = input(
+            "\nAre you sure you want to update this book?\n[1] - Yes\n[2] - No\n"
         )
 
-    if user_input_option == "1":
-        update_book_interface()
-    else:
-        return 0
+        # error handling
+        if user_option not in ["1", "2"]:
+            if user_error_redirect(
+                "\nERROR: Invalid Input Detected. Please Input an Option between [1] - [2]."
+            ):
+                update_book_interface()
+            else:
+                return 0
+
+        # updates book if user confirms, otherwise returns to main menu
+        if user_option == "1":
+            update_book(old_detail, new_detail, detail_type)
+        elif user_option == "2":
+            print("Okay. The Book will not be Updated.")
+            input("Press Any Key to Return to Main Menu.")
+            return 0
 
 
 update_book_interface()
