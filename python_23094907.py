@@ -749,9 +749,7 @@ def add_book_information():
         else:
             print("Error. Invalid status. Please try again.")
 
-    book_details = (isbn, author, title, publisher, genre,
-                    published_year, date_purchased_str, status)
-    return book_details
+    return isbn, author, title, publisher, genre, published_year, date_purchased_str, status
 
 
 '''
@@ -958,10 +956,10 @@ def delete_book(isbn):
 
 #Functional Requirement 6 - Exit Program
 def exit_program(program_start_time):
-    time_now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    time_spent = datetime.datetime.strptime(
-        time_now, "%Y-%m-%d %H:%M:%S") - datetime.datetime.strptime(program_start_time, "%Y-%m-%d %H:%M:%S")
+    time_spent = datetime.strptime(
+        time_now, "%Y-%m-%d %H:%M:%S") - datetime.strptime(program_start_time, "%Y-%m-%d %H:%M:%S")
 
     # displays time in xx Hours xx Minutes xx Seconds format
     hours, minutes, seconds = str(time_spent).split(":")
@@ -1681,7 +1679,7 @@ def main_user_interface():
     print("\nWelcome to your Personal Book Management System!\n")
     # displays current time in YYYY-MM-DD HH:MM:SS format
     print(f"The Current Time is {
-          datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}")
+          datetime.now().strftime("%Y-%m-%d %H:%M:%S")}")
 
     print(r"""
 ███████╗██╗░░░██╗███╗░░██╗░█████╗░████████╗██╗░█████╗░███╗░░██╗  ██╗░░░░░██╗░██████╗████████╗
@@ -1736,7 +1734,7 @@ Runs at program start
 
 
 def main():
-    initial_time_program_start = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    initial_time_program_start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     while True:
         if(main_user_interface() == 0):
