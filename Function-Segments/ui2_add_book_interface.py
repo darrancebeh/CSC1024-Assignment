@@ -77,7 +77,7 @@ def add_book_information():
             continue
         try:
             date_purchased = datetime.strptime(date_purchased_str, '%d/%m/%Y')
-            if date_purchased <= datetime.now() and date_purchased > published_date:
+            if date_purchased <= datetime.now() and date_purchased >= published_date:
                 break
             else:
                 print(
