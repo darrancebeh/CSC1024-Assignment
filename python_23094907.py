@@ -1166,7 +1166,19 @@ def update_book_interface():
         "To Edit an Item, Please Input the Item's 13-digit ISBN, Author OR Book Title.\n"
     )
 
-    book_details = isbn_to_details(input_to_isbn())
+    book_isbn = input_to_isbn()
+    book_details = isbn_to_details(book_isbn)
+
+    if(book_isbn == 1):
+        print("Retrying Function...")
+        input("Input Any Key to Continue.")
+        update_book_interface()
+    
+    elif(book_isbn == 0):
+        print("Returning to Main Menu...")
+        input("Input Any Key to Continue.")
+        return 1
+    
 
     """
     If user input is valid,
