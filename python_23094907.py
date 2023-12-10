@@ -949,16 +949,20 @@ def update_book(isbn, old_detail, new_detail, detail_type):
 def delete_book(isbn):
     book_list = get_books()
 
+    # deletes book from book list
     for book in book_list:
         book = book.split("|")
         if isbn in book[0]:
             book_list.remove("|".join(book))
             break
 
+    # writes the new updated book list into text file
     with open("books_23094907.txt", "w") as f:
         for book in book_list:
             f.write(book)
             f.write("\n")
+        # removes the last newline character
+        f.truncate(f.tell() - 1)
 
     print("Book Deleted Successfully!")
     print("\nReturning to Main Menu...")
@@ -1301,10 +1305,17 @@ def update_book_interface():
         elif user_update_option == "2":
             print(f"Current Author: {author}\n")
             new_author = input("Please Input New Author:\n")
+
+            # '|' is not allowed because it will be used as a delimiter in the database
+            while('|' in new_author):
+                print("ERROR: Author cannot contain '|'. Please try again.\n")
+                new_author = input("Please Input New Author:\n")
+            
             if new_author == author:
                 print(
                     f"\nThe New Inputted Author is the Same as the Old Author. No Changes Will Be Made."
                 )
+
             else:
                 old_detail = author
                 new_detail = new_author
@@ -1313,6 +1324,11 @@ def update_book_interface():
         elif user_update_option == "3":
             print(f"Current Title: {title}\n")
             new_title = input("Please Input New Title:\n")
+
+            # '|' is not allowed because it will be used as a delimiter in the database
+            while('|' in new_title):
+                print("ERROR: Title cannot contain '|'. Please try again.\n")
+                new_title = input("Please Input New Title:\n")
 
             if new_title == title:
                 print(
@@ -1328,6 +1344,12 @@ def update_book_interface():
             print(f"Current Publisher: {publisher}\n")
             new_publisher = input("Please Input New Publisher:\n")
 
+
+            # '|' is not allowed because it will be used as a delimiter in the database
+            while('|' in new_publisher):
+                print("ERROR: Publisher cannot contain '|'. Please try again.\n")
+                new_publisher = input("Please Input New Publisher:\n")
+
             if new_publisher == publisher:
                 print(
                     f"\nThe New Inputted Publisher is the Same as the Old Publisher. No Changes Will Be Made."
@@ -1341,6 +1363,11 @@ def update_book_interface():
         elif user_update_option == "5":
             print(f"Current Genre: {genre}\n")
             new_genre = input("Please Input New Genre:\n")
+
+            # '|' is not allowed because it will be used as a delimiter in the database
+            while('|' in new_genre):
+                print("ERROR: Genre cannot contain '|'. Please try again.\n")
+                new_genre = input("Please Input New Genre:\n")
 
             if new_genre == genre:
                 print(
