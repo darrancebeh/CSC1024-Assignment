@@ -67,9 +67,7 @@ def user_error_redirect(message):
     Function to let user decide whether to retry input upon error or redirect to main menu.
     """
 
-    user_input_option = input(
-        "\nRetry Input?\n[1] - Retry Input.\n[2] - Back to Main Menu.\n"
-    )
+    user_input_option = input("\nRetry Input?\n[1] - Retry Input.\n[2] - Back to Main Menu.\n")
 
     """
     Ensures that user input is either 1 or 2.
@@ -77,9 +75,7 @@ def user_error_redirect(message):
 
     while user_input_option != "1" and user_input_option != "2":
         print("\nInvalid Input Detected. Please Try Again.")
-        user_input_option = input(
-            "Retry Input?\n[1] - Retry Input.\n[2] - Back to Main Menu.\n"
-        )
+        user_input_option = input("Retry Input?\n[1] - Retry Input.\n[2] - Back to Main Menu.\n")
 
     """
     Returns True if user decides to retry input.
@@ -105,16 +101,7 @@ def input_to_isbn():
     title_list = []
 
     for book in book_list:
-        (
-            isbn,
-            author,
-            title,
-            publisher,
-            genre,
-            yop,
-            dop,
-            status,
-        ) = book.split("|")
+        (isbn, author, title, publisher, genre, yop, dop, status) = book.split("|")
 
         isbn_list.append(isbn)
         author_list.append(author)
@@ -137,9 +124,7 @@ def input_to_isbn():
             Redirects user to retry input or return to main menu.
             """
 
-            if user_error_redirect(
-                f"\nERROR: ISBN Should Contain EXACTLY 13 digits. Your Input Had {len(user_input_id)} digits."
-            ):
+            if user_error_redirect(f"\nERROR: ISBN Should Contain EXACTLY 13 digits. Your Input Had {len(user_input_id)} digits."):
                 return 1
             else:
                 return 0
@@ -151,9 +136,7 @@ def input_to_isbn():
             """
 
             if user_input_id not in isbn_list:
-                if user_error_redirect(
-                    f"\nERROR: ISBN {user_input_id} Not Found in Database."
-                ):
+                if user_error_redirect(f"\nERROR: ISBN {user_input_id} Not Found in Database."):
                     return 1
                 else:
                     return 0
@@ -168,13 +151,9 @@ def input_to_isbn():
         author_list_lower = [author.lower() for author in author_list]
         title_list_lower = [title.lower() for title in title_list]
 
-        if (
-            user_input_id.lower() not in author_list_lower
-            and user_input_id.lower() not in title_list_lower
+        if (user_input_id.lower() not in author_list_lower and user_input_id.lower() not in title_list_lower
         ):
-            if user_error_redirect(
-                f"\nERROR: {user_input_id} Not Found in Database. Please Enter a Valid ISBN, Author or Title."
-            ):
+            if user_error_redirect(f"\nERROR: {user_input_id} Not Found in Database. Please Enter a Valid ISBN, Author or Title."):
                 return 1
             else:
                 return 0
@@ -187,13 +166,9 @@ def input_to_isbn():
             """
 
             if user_input_id.lower() in author_list_lower:
-                user_input_id = author_list[
-                    author_list_lower.index(user_input_id.lower())
-                ]
+                user_input_id = author_list[author_list_lower.index(user_input_id.lower())]
             else:
-                user_input_id = title_list[
-                    title_list_lower.index(user_input_id.lower())
-                ]
+                user_input_id = title_list[title_list_lower.index(user_input_id.lower())]
 
             """'
             If user inputted author name,
@@ -209,9 +184,7 @@ def input_to_isbn():
                 """
 
                 if author_book_list:
-                    print(
-                        f"\nMultiple Books Found for Author {user_input_id}."
-                    )
+                    print(f"\nMultiple Books Found for Author {user_input_id}.")
                     print("Please Select the Book to Update:\n")
                     book_count = 0
 
@@ -221,39 +194,22 @@ def input_to_isbn():
 
                     for book in author_book_list:
                         book_count += 1
-                        (
-                            isbn,
-                            author,
-                            title,
-                            publisher,
-                            genre,
-                            yop,
-                            dop,
-                            status,
-                        ) = book
+                        (isbn, author, title, publisher, genre, yop, dop, status) = book
 
-                        print(
-                            f"[{book_count}] | {isbn} | {title} | {genre} | {status}"
-                        )
+                        print(f"[{book_count}] | {isbn} | {title} | {genre} | {status}")
 
                     """
                     Prompts user to input book number to update.
                     """
 
-                    user_input_book_number = input(
-                        f"\nPlease Input Book Number to Update: [1] - [{book_count}]\n"
-                    )
+                    user_input_book_number = input(f"\nPlease Input Book Number to Update: [1] - [{book_count}]\n")
 
-                    if user_input_book_number not in [
-                        str(i) for i in range(1, book_count + 1)
-                    ]:
+                    if user_input_book_number not in [str(i) for i in range(1, book_count + 1)]:
                         """
                         Data validation to ensure that user input is a valid book number.
                         """
 
-                        if user_error_redirect(
-                            f"\nERROR: Invalid Input Detected. Please Input an Option between [1] - [{book_count}]."
-                        ):
+                        if user_error_redirect(f"\nERROR: Invalid Input Detected. Please Input an Option between [1] - [{book_count}]."):
                             return 1
                         else:
                             return 0
@@ -265,9 +221,7 @@ def input_to_isbn():
                         This is because ISBN is unique to each book and WILL NOT HAVE duplicates.
                         """
 
-                        user_input_id = author_book_list[
-                            int(user_input_book_number) - 1
-                        ][0]
+                        user_input_id = author_book_list[int(user_input_book_number) - 1][0]
 
                 else:
                     """
@@ -281,25 +235,14 @@ def input_to_isbn():
                     Converts user input to correct author name case.
                     """
                     if user_input_id.lower() in author_list_lower:
-                        user_input_id = author_list[
-                            author_list_lower.index(user_input_id.lower())
-                        ]
+                        user_input_id = author_list[author_list_lower.index(user_input_id.lower())]
 
                     """
                     Runs through the book list to find book with same author name.
                     Assigns book ISBN to user input.
                     """
                     for book in book_list:
-                        (
-                            isbn,
-                            author,
-                            title,
-                            publisher,
-                            genre,
-                            yop,
-                            dop,
-                            status,
-                        ) = book.split("|")
+                        (isbn, author, title, publisher, genre, yop, dop, status) = book.split("|")
                         if author == user_input_id:
                             user_input_id = isbn
 
@@ -311,16 +254,7 @@ def input_to_isbn():
                 """
 
                 for book in book_list:
-                    (
-                        isbn,
-                        author,
-                        title,
-                        publisher,
-                        genre,
-                        yop,
-                        dop,
-                        status,
-                    ) = book.split("|")
+                    (isbn, author, title, publisher, genre, yop, dop, status) = book.split("|")
                     if title == user_input_id:
                         user_input_id = isbn
 
@@ -336,7 +270,6 @@ def isbn_to_details(isbn):
         book = book.split("|")
         if isbn == book[0]:
             return book
-        
 
 '''
 Auxilary Functions END
@@ -432,11 +365,7 @@ def sort_book_superlist(category, order):
     and order, which determines if it will be sorted in ascending or descending order.
     Also takes the lowercase of the chosen detail so that it is sorted properly regardless of letter case.
     """
-    sorted_superlist = sorted(
-        book_superlist,
-        key=lambda book: book[category].lower(),
-        reverse=order,
-    )
+    sorted_superlist = sorted(book_superlist, key=lambda book: book[category].lower(), reverse=order,)
     """
     Returns the sorted list.
     """
@@ -496,16 +425,7 @@ def display_sorted_books(single_sorted_list):
     """
     Creates the list of categories
     """
-    categories = [
-        "ISBN",
-        "AUTHOR",
-        "TITLE",
-        "PUBLISHER",
-        "GENRE",
-        "YEAR PUBLISHED",
-        "DATE PURCHASED",
-        "STATUS",
-    ]
+    categories = ["ISBN", "AUTHOR", "TITLE", "PUBLISHER", "GENRE", "YEAR PUBLISHED", "DATE PURCHASED", "STATUS"]
 
     """
     The longest column length (the length of the longest detail in the column) is determined.
@@ -545,9 +465,7 @@ def display_sorted_books(single_sorted_list):
         book_details = book.split("|")
 
         for detail in book_details:
-            column_length = (
-                get_max_column_length(book_details.index(detail)) + 2
-            )
+            column_length = (get_max_column_length(book_details.index(detail)) + 2)
             # +2 to leave a little space before the next column and prevent them from being too close together.
 
             if column_length < len(categories[book_details.index(detail)]):
@@ -565,9 +483,7 @@ def sort_books():
     If 'n' or 'N' is entered, breaks the loop.
     If anything else is entered, continues on with sorting options.
     """
-    while input(
-        "---------------------------------------------------------------------------------------------------\nSort the display? (Enter N to decline and return to main menu, or anything else to accept) \n"
-    ).upper() != "N":
+    while input("---------------------------------------------------------------------------------------------------\nSort the display? (Enter N to decline and return to main menu, or anything else to accept) \n").upper() != "N":
 
         """
         Checks if input is an integer.
@@ -577,7 +493,7 @@ def sort_books():
         try:
             category_input = int(
                 input(
-                    r"""
+r"""
 Sort by:
 ISBN [1]
 Author [2]
@@ -668,9 +584,7 @@ Descending order (Z→A/9→0) [2]
                         The sorted book list is displayed.
                         """
                         sorted_superlist = sort_book_superlist(category, order)
-                        single_sorted_list = turn_superlist_into_single_list(
-                            sorted_superlist
-                        )
+                        single_sorted_list = turn_superlist_into_single_list(sorted_superlist)
                         display_sorted_books(single_sorted_list)
     
     print("Returning to Main Menu...")
@@ -785,8 +699,7 @@ def display_books():
     '''
     Creates the list of categories
     '''
-    categories = ["ISBN", "AUTHOR", "TITLE", "PUBLISHER",
-                  "GENRE", "YEAR PUBLISHED", "DATE PURCHASED", "STATUS"]
+    categories = ["ISBN", "AUTHOR", "TITLE", "PUBLISHER", "GENRE", "YEAR PUBLISHED", "DATE PURCHASED", "STATUS"]
 
     '''
     The longest column length (the length of the longest detail in the column) is determined.
@@ -829,8 +742,7 @@ def display_books():
 
         for detail in book_details:
 
-            column_length = get_max_column_length(
-                book_details.index(detail)) + 2
+            column_length = get_max_column_length(book_details.index(detail)) + 2
             # +2 to leave a little space before the next column and prevent them from being too close together.
 
             if column_length < len(categories[book_details.index(detail)]):
@@ -865,7 +777,6 @@ def search_books():
 ░╚════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚══════╝░╚════╝░░╚═════╝░░╚═════╝░╚══════╝"""
     )
 
-    book_list = get_books()
     display_books()
 
     print("___________________________________________\n")
@@ -890,12 +801,11 @@ def search_books():
     return 0
 
 
-#Functional Requirement 3 - Add Book Record(s) 
+#Functional Requirement 3 - Add Book Record(s)
 def add_book(book_details):
     with open("books_23094907.txt", 'a') as f:
         isbn, author, title, publisher, genre, published_year, date_purchased_str, status = book_details
-        book_information = f"{isbn}|{author}|{title}|{publisher}|{
-            genre}|{published_year}|{date_purchased_str}|{status}"
+        book_information = f"{isbn}|{author}|{title}|{publisher}|{genre}|{published_year}|{date_purchased_str}|{status}"
         f.write('\n' + book_information)
     print("Book added successfully!")
 
@@ -935,8 +845,7 @@ def update_book(isbn, old_detail, new_detail, detail_type):
         book_details = book.split("|")
         if book_details[0] == isbn:
             if book_details[detail_to_index_identifier[detail_type]] == old_detail:
-                book_details[detail_to_index_identifier[detail_type]
-                             ] = new_detail
+                book_details[detail_to_index_identifier[detail_type]] = new_detail
                 book_list[book_list.index(book)] = "|".join(book_details)
 
     """
@@ -980,13 +889,11 @@ def delete_book(isbn):
 def exit_program(program_start_time):
     time_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    time_spent = datetime.strptime(
-        time_now, "%Y-%m-%d %H:%M:%S") - datetime.strptime(program_start_time, "%Y-%m-%d %H:%M:%S")
+    time_spent = datetime.strptime(time_now, "%Y-%m-%d %H:%M:%S") - datetime.strptime(program_start_time, "%Y-%m-%d %H:%M:%S")
 
     # displays time in xx Hours xx Minutes xx Seconds format
     hours, minutes, seconds = str(time_spent).split(":")
-    print(f"You Spent {hours} Hours {minutes} Minutes {
-          seconds} Seconds using This Program.")
+    print(f"You Spent {hours} Hours {minutes} Minutes {seconds} Seconds using This Program.")
     user_option_exit = input("Are You Sure You Want To Exit? (Y/N): ").upper()
 
     '''
@@ -1082,8 +989,7 @@ def add_book_interface():
 
     print("\n_____________________________________")
 
-    user_input_confirm = input(
-        "\nAre you sure you want to add this book with the following details?\n[1] - Yes\n[2] - No\n\n")
+    user_input_confirm = input("\nAre you sure you want to add this book with the following details?\n[1] - Yes\n[2] - No\n\n")
 
     while user_input_confirm not in ["1", "2"]:
         print("\nAre you sure you want to add this book with the following details?\n")
@@ -1097,9 +1003,7 @@ def add_book_interface():
         input("Press Any Key to Return to Main Menu.")
         return 0
 
-    print(
-        "\nCongratulations! Your Input is Valid and A Book Has Been Added!\n"
-    )
+    print("\nCongratulations! Your Input is Valid and A Book Has Been Added!\n")
 
     print(f"\nBook Added: {title} by {author}")
     print("\nBook Details:\n")
@@ -1117,9 +1021,7 @@ def add_book_interface():
 
     while user_input_option not in ["1", "2"]:
         print("\nWould You Like to Add Another Book?\n")
-        user_input_option = input(
-            "[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n"
-        )
+        user_input_option = input("[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n")
 
     if user_input_option == "1":
         add_book_interface()
@@ -1168,9 +1070,7 @@ def update_book_interface():
 
     print("_____________________________________")
     print(f"\nAll Books Have Been Displayed.\n")
-    print(
-        "To Edit an Item, Please Input the Item's 13-digit ISBN, Author OR Book Title.\n"
-    )
+    print("To Edit an Item, Please Input the Item's 13-digit ISBN, Author OR Book Title.\n")
 
     book_isbn = input_to_isbn()
     book_details = isbn_to_details(book_isbn)
@@ -1216,16 +1116,7 @@ def update_book_interface():
 
     for book in book_list:
         # temp variables assigned because we only use this for loop to search for the specific user-inputted book
-        (
-            temp_isbn,
-            temp_author,
-            temp_title,
-            temp_publisher,
-            temp_genre,
-            temp_yop,
-            temp_dop,
-            temp_status,
-        ) = book.split("|")
+        temp_isbn = book.split("|")[0]
 
         # adds every book's isbn into isbn_list to check for duplicates
         isbn_list.append(temp_isbn)
@@ -1260,23 +1151,10 @@ def update_book_interface():
     new_detail = ""
     detail_type = ""
 
-    user_update_option = input(
-        "[1] - ISBN\n[2] - Author\n[3] - Title\n[4] - Publisher\n[5] - Genre\n[6] - Year of Publication\n[7] - Date of Purchase\n[8] - Book Status\n\n"
-    )
+    user_update_option = input("[1] - ISBN\n[2] - Author\n[3] - Title\n[4] - Publisher\n[5] - Genre\n[6] - Year of Publication\n[7] - Date of Purchase\n[8] - Book Status\n\n")
 
-    if user_update_option not in [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-    ]:
-        if user_error_redirect(
-            "\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4]."
-        ):
+    if user_update_option not in ["1", "2", "3", "4", "5", "6", "7", "8"]:
+        if user_error_redirect("\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4]."):
             update_book_interface()
         else:
             return 0
@@ -1286,9 +1164,7 @@ def update_book_interface():
             new_isbn = input("Please Input New ISBN (13 Digits):\n")
 
             if len(new_isbn) != 13:
-                if user_error_redirect(
-                    f"\nERROR: ISBN Should Contain EXACTLY 13 digits. Your Input Had {len(new_isbn)} digits."
-                ):
+                if user_error_redirect(f"\nERROR: ISBN Should Contain EXACTLY 13 digits. Your Input Had {len(new_isbn)} digits."):
                     update_book_interface()
                 else:
                     return 0
@@ -1299,18 +1175,14 @@ def update_book_interface():
                 """
 
                 if new_isbn == isbn:
-                    print(
-                        f"\nThe New Inputted ISBN is the Same as the Old ISBN. No Changes Will Be Made."
-                    )
+                    print(f"\nThe New Inputted ISBN is the Same as the Old ISBN. No Changes Will Be Made.")
                 else:
                     """
                     If user inputs a new ISBN that already exists in the database,
                     returns an error message and redirects user to input error handling function.
                     """
                     if new_isbn in isbn_list:
-                        if user_error_redirect(
-                            f"\nERROR: ISBN {new_isbn} Already Exists in Database."
-                        ):
+                        if user_error_redirect(f"\nERROR: ISBN {new_isbn} Already Exists in Database."):
                             update_book_interface()
                         else:
                             return 0
@@ -1330,9 +1202,7 @@ def update_book_interface():
                 new_author = input("Please Input New Author:\n")
             
             if new_author == author:
-                print(
-                    f"\nThe New Inputted Author is the Same as the Old Author. No Changes Will Be Made."
-                )
+                print(f"\nThe New Inputted Author is the Same as the Old Author. No Changes Will Be Made.")
 
             else:
                 old_detail = author
@@ -1349,9 +1219,7 @@ def update_book_interface():
                 new_title = input("Please Input New Title:\n")
 
             if new_title == title:
-                print(
-                    f"\nThe New Inputted Title is the Same as the Old Title. No Changes Will Be Made."
-                )
+                print(f"\nThe New Inputted Title is the Same as the Old Title. No Changes Will Be Made.")
 
             else:
                 old_detail = title
@@ -1369,9 +1237,7 @@ def update_book_interface():
                 new_publisher = input("Please Input New Publisher:\n")
 
             if new_publisher == publisher:
-                print(
-                    f"\nThe New Inputted Publisher is the Same as the Old Publisher. No Changes Will Be Made."
-                )
+                print(f"\nThe New Inputted Publisher is the Same as the Old Publisher. No Changes Will Be Made.")
 
             else:
                 old_detail = publisher
@@ -1388,9 +1254,7 @@ def update_book_interface():
                 new_genre = input("Please Input New Genre:\n")
 
             if new_genre == genre:
-                print(
-                    f"\nThe New Inputted Genre is the Same as the Old Genre. No Changes Will Be Made."
-                )
+                print(f"\nThe New Inputted Genre is the Same as the Old Genre. No Changes Will Be Made.")
 
             else:
                 old_detail = genre
@@ -1402,17 +1266,13 @@ def update_book_interface():
             new_yop = input("Please Input New Year of Publication:\n")
 
             if len(new_yop) != 4:
-                if user_error_redirect(
-                    f"\nERROR: Year of Publication Should Contain EXACTLY 4 digits. Your Input Had {len(new_yop)} digits."
-                ):
+                if user_error_redirect(f"\nERROR: Year of Publication Should Contain EXACTLY 4 digits. Your Input Had {len(new_yop)} digits."):
                     update_book_interface()
                 else:
                     return 0
 
             if new_yop == yop:
-                print(
-                    f"\nThe New Inputted Year of Publication is the Same as the Old Year of Publication. No Changes Will Be Made."
-                )
+                print(f"\nThe New Inputted Year of Publication is the Same as the Old Year of Publication. No Changes Will Be Made.")
             else:
                 old_detail = yop
                 new_detail = new_yop
@@ -1420,14 +1280,10 @@ def update_book_interface():
 
         elif user_update_option == "7":
             print(f"Current Date of Purchase: {dop}\n")
-            new_dop = input(
-                "Please Input New Date of Purchase (DD/MM/YYYY):\n"
-            )
+            new_dop = input("Please Input New Date of Purchase (DD/MM/YYYY):\n")
 
             if len(new_dop) != 10:
-                if user_error_redirect(
-                    f"\nERROR: Date of Purchase Should Contain EXACTLY 10 characters including '/'. Your Input Had {len(new_dop)} digits."
-                ):
+                if user_error_redirect(f"\nERROR: Date of Purchase Should Contain EXACTLY 10 characters including '/'. Your Input Had {len(new_dop)} digits."):
                     update_book_interface()
                 else:
                     return 0
@@ -1435,33 +1291,25 @@ def update_book_interface():
             dop_day, dop_month, dop_year = new_dop.split("/")
 
             if int(dop_day) > 31 or int(dop_day) < 1:
-                if user_error_redirect(
-                    f"\nERROR: Day of Purchase Should Be Between 1 and 31."
-                ):
+                if user_error_redirect(f"\nERROR: Day of Purchase Should Be Between 1 and 31."):
                     update_book_interface()
                 else:
                     return 0
 
             if int(dop_month) > 12 or int(dop_month) < 1:
-                if user_error_redirect(
-                    f"\nERROR: Month of Purchase Should Be Between 1 and 12."
-                ):
+                if user_error_redirect(f"\nERROR: Month of Purchase Should Be Between 1 and 12."):
                     update_book_interface()
                 else:
                     return 0
 
             if int(dop_year) > 2023 or int(dop_year) < 0:
-                if user_error_redirect(
-                    f"\nERROR: Year of Purchase Should Be Between 0 and 2023."
-                ):
+                if user_error_redirect(f"\nERROR: Year of Purchase Should Be Between 0 and 2023."):
                     update_book_interface()
                 else:
                     return 0
 
             if new_dop == dop:
-                print(
-                    f"\nThe New Inputted Date of Purchase is the Same as the Old Date of Purchase. No Changes Will Be Made."
-                )
+                print(f"\nThe New Inputted Date of Purchase is the Same as the Old Date of Purchase. No Changes Will Be Made.")
             else:
                 old_detail = dop
                 new_detail = new_dop
@@ -1469,14 +1317,10 @@ def update_book_interface():
 
         elif user_update_option == "8":
             print(f"Current Status: {status}\n")
-            new_status = input(
-                "Please Input New Status:\n[1] - Wishlist\n[2] - To-Read\n[3] - Reading\n[4] - Completed\n\n"
-            )
+            new_status = input("Please Input New Status:\n[1] - Wishlist\n[2] - To-Read\n[3] - Reading\n[4] - Completed\n\n")
 
             if new_status not in ["1", "2", "3", "4"]:
-                if user_error_redirect(
-                    "\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4]."
-                ):
+                if user_error_redirect("\nERROR: Invalid Input Detected. Please Input an Option between [1] - [4]."):
                     update_book_interface()
                 else:
                     return 0
@@ -1491,9 +1335,7 @@ def update_book_interface():
                 new_status = "completed"
 
             if new_status == status:
-                print(
-                    f"\nThe New Inputted Status is the Same as the Old Status. No Changes Will Be Made."
-                )
+                print(f"\nThe New Inputted Status is the Same as the Old Status. No Changes Will Be Made.")
 
             else:
                 old_detail = status
@@ -1502,22 +1344,14 @@ def update_book_interface():
 
     
     if(detail_type == ""):
-        print(
-            "\nYour Inputted Details are The Same as The Previous Details. Thus, No Changes Will Be Made."
-        )
-        print(
-            "\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n"
-        )
+        print("\nYour Inputted Details are The Same as The Previous Details. Thus, No Changes Will Be Made.")
+        print("\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n")
         user_input_option = input("[1] - Yes\n[2] - No\n\n")
 
         while user_input_option not in ["1", "2"]:
             # error handling: asks user for input again if input is invalid
-            print(
-                "\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n"
-            )
-            user_input_option = input(
-                "[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n"
-            )
+            print("\nNo Updates Will Be Made From Your Input.\nWould You Like to Try Again?\n")
+            user_input_option = input("[1] - Yes, Retry the Function\n[2] - No, Return to Main Menu.\n\n")
 
         if user_input_option == "1":
             update_book_interface()
@@ -1532,15 +1366,11 @@ def update_book_interface():
         print(f"New {detail_type.capitalize()}: {new_detail}")
 
         # double confirms with user to confirm whether they want to update the selected book
-        user_option = input(
-            "\nAre you sure you want to update this book?\n[1] - Yes\n[2] - No\n"
-        )
+        user_option = input("\nAre you sure you want to update this book?\n[1] - Yes\n[2] - No\n")
 
         # error handling
         if user_option not in ["1", "2"]:
-            if user_error_redirect(
-                "\nERROR: Invalid Input Detected. Please Input an Option between [1] - [2]."
-            ):
+            if user_error_redirect("\nERROR: Invalid Input Detected. Please Input an Option between [1] - [2]."):
                 update_book_interface()
             else:
                 return 0
@@ -1603,14 +1433,12 @@ def delete_book_interface():
         '''
         Double confirms with user to confirm whether they want to delete the selected book.
         '''
-        user_option = input(
-            "Are you sure you want to delete this book?\n[1] - Yes\n[2] - No\n")
+        user_option = input("Are you sure you want to delete this book?\n[1] - Yes\n[2] - No\n")
 
         # error handling
         if (user_option not in ['1', '2']):
             print("Invalid Input!")
-            user_option = input(
-                "Are you sure you want to delete this book?\n[1] - Yes\n[2] - No\n")
+            user_option = input("Are you sure you want to delete this book?\n[1] - Yes\n[2] - No\n")
 
         # deletes book if user confirms, otherwise returns to main menu
         if (user_option == "Y" or user_option == "1"):
@@ -1644,15 +1472,9 @@ def display_team_background():
     print("5) Lee Ming Hui Isaac")
 
     print("\nProject Background\n")
-    print(
-        "- This project is a final group assessment for the subject CSC1024 - Programming Principles."
-    )
-    print(
-        "- The project is a book management system that allows users to add, update, delete and view books in a database."
-    )
-    print(
-        "- For this project, the team utilized the GitHub platform to collaborate on the project under the guidance of the Team Lead."
-    )
+    print("- This project is a final group assessment for the subject CSC1024 - Programming Principles.")
+    print("- The project is a book management system that allows users to add, update, delete and view books in a database.")
+    print("- For this project, the team utilized the GitHub platform to collaborate on the project under the guidance of the Team Lead.")
 
     print(
         r"""
@@ -1666,43 +1488,27 @@ def display_team_background():
     )
     print("\nDarrance Beh Heng Shek (Team Lead)")
     print("- Responsible for Managing the Team and the Project.")
-    print(
-        "- Ensures that the Project is on Track and that the Team is on Schedule to Meet Project Deadline."
-    )
-    print(
-        "- Gave Guidance and Constructive Feedback to Team Members and Made Sure All Member's Work Meets Quality Standards."
-    )
-    print(
-        "- Responsible for the Update Book Record(s) Functions, ALL Auxilary Functions, ALL Utility Functions, UI/UX Experience."
-    )
-    print(
-        "- Responsible for Compiling Final Program and Bug-Testing The Program."
-    )
+    print("- Ensures that the Project is on Track and that the Team is on Schedule to Meet Project Deadline.")
+    print("- Gave Guidance and Constructive Feedback to Team Members and Made Sure All Member's Work Meets Quality Standards.")
+    print("- Responsible for the Update Book Record(s) Functions, ALL Auxilary Functions, ALL Utility Functions, UI/UX Experience.")
+    print("- Responsible for Compiling Final Program and Bug-Testing The Program.")
     print("- Compiled the Final Report and Final Flowchart.")
 
     print("\nDeron Ho Wen Harn")
     print("- Responsible for the Display Book Record(s) Function.")
-    print(
-        "- Wrote Report Section and Drew Flowchart for their Responsible Function."
-    )
+    print("- Wrote Report Section and Drew Flowchart for their Responsible Function.")
 
     print("\nIzzat Zulqarnain Bin Izaiddin")
     print("- Responsible for the Search Book Record(s) Function.")
-    print(
-        "- Wrote Report Section and Drew Flowchart for their Responsible Function."
-    )
+    print("- Wrote Report Section and Drew Flowchart for their Responsible Function.")
 
     print("\nTan Ho Chen")
     print("- Partially Responsible for the Delete Book Record(s) Function.")
-    print(
-        "- Partially Responsible for Writing Report Section and Drawing Flowchart for their Responsible Function."
-    )
+    print("- Partially Responsible for Writing Report Section and Drawing Flowchart for their Responsible Function.")
 
     print("\nLee Ming Hui Isaac")
     print("- Responsible for the Add Book Record(s) Function.")
-    print(
-        "- Wrote Report Section and Drew Flowchart for their Responsible Function."
-    )
+    print("- Wrote Report Section and Drew Flowchart for their Responsible Function.")
 
     input("\n\nInput any Key to Return to Main Menu.\n")
     return 0
@@ -1740,8 +1546,7 @@ def main_user_interface():
 
     print("\nWelcome to your Personal Book Management System!\n")
     # displays current time in YYYY-MM-DD HH:MM:SS format
-    print(f"The Current Time is {
-          datetime.now().strftime("%Y-%m-%d %H:%M:%S")}")
+    print(f"The Current Time is {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}")
 
     print(r"""
 ███████╗██╗░░░██╗███╗░░██╗░█████╗░████████╗██╗░█████╗░███╗░░██╗  ██╗░░░░░██╗░██████╗████████╗
@@ -1763,8 +1568,7 @@ def main_user_interface():
 
     while (user_input_function_option not in ['1', '2', '3', '4', '5', 'x']):
         print("\nInvalid Input Detected. Please Try Again.")
-        user_input_function_option = input(
-            "Input Option Here: ")
+        user_input_function_option = input("Input Option Here: ")
 
     option_to_function_identifier = {
         "1": display_book_interface,
