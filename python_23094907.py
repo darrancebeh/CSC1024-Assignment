@@ -707,7 +707,13 @@ def add_book_information():
             print(
                 "Error. The author's name must only contain alphabetical characters. Please try again.")
     title = input("Book's title: ")
+    while('|' in title):
+        print("Error. The character '|' is not allowed in the book's title.")
+        title = input("Book's title: ")
     publisher = input("Publisher's name: ")
+    while('|' in publisher):
+        print("Error. The character '|' is not allowed in the publisher's name.")
+        publisher = input("Publisher's name: ")
     while True:
         genre = input("Genre of the book: ")
         if all(word.isalpha() for word in genre.split()):
