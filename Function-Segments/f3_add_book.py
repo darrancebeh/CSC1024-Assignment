@@ -19,11 +19,15 @@ def check_isbn_duplicate(isbn):
 
 
 def add_book(book_details):
-    with open("books_23094907.txt", 'a') as f:
-        isbn, author, title, publisher, genre, published_year, date_purchased_str, status = book_details
-        book_information = f"{isbn}|{author}|{title}|{publisher}|{
-            genre}|{published_year}|{date_purchased_str}|{status}"
-        f.write('\n' + book_information)
+    isbn, author, title, publisher, genre, published_year, date_purchased_str, status = book_details
+    if '|' in title or '|' in author or '|' in publisher or '|' in genre:
+        print(
+            "Error: The character '|' is not allowed in the book's title, author's name, publisher's name and genre.")
+        return
+    else:
+        book_information = f"{isbn}|{author}|{title}|{publisher}|{genre}|{published_year}|{date_purchased_str}|{status}"
+        with open("books_23094907.txt", 'a') as f:
+            f.write('\n' + book_information)
     print("Book added successfully!")
 
 
