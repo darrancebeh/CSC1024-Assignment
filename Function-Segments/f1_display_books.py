@@ -1,14 +1,4 @@
-import os
-
 from aux1_get_books import get_books
-
-
-def clear():
-    '''
-    Clears the Screen for better visibility.
-    '''
-
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def display_books():
