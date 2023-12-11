@@ -1546,7 +1546,7 @@ def main_user_interface():
 
     print("\nWelcome to your Personal Book Management System!\n")
     # displays current time in YYYY-MM-DD HH:MM:SS format
-    print(f"The Current Time is {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}")
+    print(f"The Current Time is {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
     print(r"""
 ███████╗██╗░░░██╗███╗░░██╗░█████╗░████████╗██╗░█████╗░███╗░░██╗  ██╗░░░░░██╗░██████╗████████╗
