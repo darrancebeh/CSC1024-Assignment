@@ -1566,7 +1566,7 @@ def main_user_interface():
     Error handling for user input if input is not in the options.
     '''
 
-    while (user_input_function_option not in ['1', '2', '3', '4', '5', 'x']):
+    while (user_input_function_option not in ['1', '2', '3', '4', '5', '6', 'x']):
         print("\nInvalid Input Detected. Please Try Again.")
         user_input_function_option = input("Input Option Here: ")
 
