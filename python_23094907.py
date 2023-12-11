@@ -1613,7 +1613,7 @@ def main():
     '''
 
     # calls exit_program with initial time of program start as parameter to calculate total time used in program
-    if (not exit_program(initial_time_program_start)):
+    while (not exit_program(initial_time_program_start)):
         main_user_interface()
     else:
         return None
