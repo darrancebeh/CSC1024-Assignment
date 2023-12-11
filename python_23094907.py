@@ -1600,6 +1600,7 @@ Runs at program start
 
 
 def main():
+    clear()
     initial_time_program_start = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     while True:
