@@ -7,6 +7,10 @@
 
 Most technicalities have already been discussed in-person. Thus, this README only serves to act as a general guideline for our assignment.
 
+
+
+To run our program in the browser, you can run it via the Replit link: https://replit.com/@darrancebeh/CSC1024-Assignment?v=1
+
 The final report of our assignment can be viewed in the repo or via the Google Docs link: https://docs.google.com/document/d/1IvqGoOetiqmAvU7L1w-1YKCPPFfmgxvN_GAr50nIQ3g/edit?usp=sharing
 
 
