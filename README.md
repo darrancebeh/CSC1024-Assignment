@@ -8,6 +8,7 @@
 Most technicalities have already been discussed in-person. Thus, this README only serves to act as a general guideline for our assignment.
 
 
+Informal Pre-Assignment Briefing Video by Darrance: https://www.youtube.com/watch?v=8AXbn0C9f3c
 
 To run our program in the browser, you can run it via the Replit link: https://replit.com/@darrancebeh/CSC1024-Assignment?v=1
 
